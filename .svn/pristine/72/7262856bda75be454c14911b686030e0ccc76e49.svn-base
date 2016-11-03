@@ -1,0 +1,14 @@
+﻿using Microsoft.Owin;
+using Owin;
+
+[assembly: OwinStartupAttribute(typeof(Surveillance_Performance.Startup))]
+namespace Surveillance_Performance
+{
+    public partial class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            ConfigureAuth(app);
+        }
+    }
+}

@@ -1,0 +1,7 @@
+﻿
+<hr />
+<div data-ng-controller="MapController">
+    <div id="mapid"></div>
+</div>
+
+

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <adsb>
+    <name>Suratthani</name>
+    <type>MSSR-S IRS-20MP/S</type>
+    <sic>82</sic>
+    <lat>9|8|0.9</lat>
+    <lng>99|8|43.6</lng>
+  </adsb>
+</root>

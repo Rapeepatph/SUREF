@@ -1,0 +1,91 @@
+﻿app.controller('mapController', ['$scope', function ($scope) {
+
+    var icons = {
+        blue:{
+            type: 'div',
+            iconSize: [10, 10],
+            className: 'blue',
+            iconAnchor:  [5, 5]
+        },
+        red: {
+            type: 'div',
+            iconSize: [10, 10],
+            className: 'red',
+            iconAnchor:  [5, 5]
+        },
+        adsb: {
+            iconUrl: '/images/marker-icon.png'
+        },
+        ssr: {
+            iconUrl: '/images/red-marker.png'
+        }
+    }
+
+    angular.extend($scope, {
+        bangkok: {
+            lat: 13.715560,
+            lng: 100.540599,
+            zoom: 6
+        },
+        layers: {
+            baselayers: {
+                openStreetMap: {
+                    name: 'OpenStreetMap',
+                    type: 'xyz',
+                    url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                }
+            },
+            overlays: {
+                ssr: {
+                    type: 'group',
+                    name: 'SSR',
+                    visible: false
+                },
+
+                adsb: {
+                    type: 'group',
+                    name: 'ADS-B',
+                    visible: false
+                }
+            }
+        },
+        markers: {
+            cars: {
+                layer: 'adsb',
+                lat: 13.715560,
+                lng: 107.540599,
+                icon: icons.adsb
+            },
+             stoke: {
+                 layer: 'adsb',
+                     lat: 13.715560,
+                     lng: 101.540599,
+                     icon: icons.adsb
+             },
+
+             dalston: {
+                 layer: 'adsb',
+                 lat: 13.715560,
+                 lng: 99.540599,
+                 icon: icons.adsb
+             },
+
+             wandsworth: {
+                 layer: 'ssr',
+                 lat: 13.715560,
+                 lng: 102.540599,
+                 icon: icons.ssr
+             },
+
+             battersea: {
+                 layer: 'ssr',
+                 lat: 13.715560,
+                 lng: 98.540599,
+                 icon: icons.ssr
+             }
+       },
+        toggleLayer: function (type) {
+            $scope.layers.overlays[type].visible = !$scope.layers.overlays[type].visible;
+        }
+    });
+}]);
