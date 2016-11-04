@@ -7,8 +7,10 @@ using System.Web.Mvc;
 
 namespace SUREF.Controllers
 {
+    [Authorize]
     public class MapController : Controller
     {
+        
         // GET: Map
         public ActionResult Index()
         {

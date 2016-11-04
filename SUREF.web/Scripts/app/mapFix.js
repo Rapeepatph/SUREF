@@ -1,10 +1,8 @@
-﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', function ($scope, $http, leafletData, $q) {
+﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', 'httpFactory', function ($scope, $http, leafletData, $q, httpFactory) {
     var items = [];
-    var circlePlots = [];
     var qlist = [];
-    var pathsCircle = [];
     var plot = {};
-    $scope.paths = [ ];
+    $scope.paths = [];
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.format("DD MMM YYYY HH:mm:ss.SSS");
@@ -168,10 +166,7 @@
                         visible: false
                     }
                 },
-                
-            
 },
-
             toggleLayer: function (type) {
                 $scope.layers.overlays[type].visible = !$scope.layers.overlays[type].visible;
             }
@@ -187,7 +182,6 @@
             ssrTrack(res[1].data);
             uploadAdsb(res[2].data);
             uploadSSR(res[3].data);
-            console.log(circlePlots);
             //leafletData.getMap("map").then(
             //    function (map) {
             //        var coverage = new L.layerGroup();
@@ -209,14 +203,15 @@
             //    }
             //   );
 
-           }, function error(response) {
-
-                }
-        ).finally(function () {
-
-        });
+           }, function error(response) {}
+        ).finally(function () {});
         console.log(items);
         $scope.markers = items;
+
+
+        httpFactory.http('/Map/getSSR').then(function(result){
+            console.log(result.length);
+        });
     };
     init();
 }]);

@@ -30,6 +30,7 @@ namespace SUREF
                       "~/Content/leaflet.css"));
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
+                      "~/Scripts/angular-resource.js",
                       "~/Scripts/app/app.js",
                       "~/Scripts/app/services.js"
                       ));
