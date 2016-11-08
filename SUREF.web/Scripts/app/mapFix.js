@@ -9,81 +9,106 @@
     };
     
     var adsbTrack = function (points) {
-        return points.map(function (ap) {
-            return items.push({
-                layer: 'track',
-                lat: ap[1],
-                lng: ap[2],
-                icon: icons.blue,
-                message: "[ADSB]"+getDateTime(ap[0]) + " - [ " + ap[1] + ", " + ap[2] + " ]"
+        if (points.length > 0)
+        {
+            return points.map(function (ap) {
+                return items.push({
+                    layer: 'track',
+                    lat: ap[1],
+                    lng: ap[2],
+                    icon: icons.blue,
+                    message: "[ADSB]" + getDateTime(ap[0]) + " - [ " + ap[1] + ", " + ap[2] + " ]"
+                });
             });
-        });
+        }
+        else {
+            return
+            console.log("Error about data of track. ADSB has not a data");
+        }
+        
     };
     
     var ssrTrack = function (points) {
-        return points.map(function (ap) {
-            return items.push({
-                layer: 'track',
-                lat: ap[1],
-                lng: ap[2],
-                icon: icons.red,
-                message: "[SSR]"+getDateTime(ap[0]) + " - [ " + ap[1] + ", " + ap[2] + " ]"
+        if (points.length > 0) {
+            return points.map(function (ap) {
+                return items.push({
+                    layer: 'track',
+                    lat: ap[1],
+                    lng: ap[2],
+                    icon: icons.red,
+                    message: "[SSR]" + getDateTime(ap[0]) + " - [ " + ap[1] + ", " + ap[2] + " ]"
+                });
             });
-        });
+        }
+        else {
+            return
+            console.log("Error about data of track. SSR has not a data");
+        }
     };
 
     var uploadAdsb = function (points) {
-        angular.forEach(points, function (element) {
-            plot = {
-                layer: 'adsb',
-                lat: element.Lat,
-                lng: element.Lng,
-                icon: icons.adsb,
-                message: element.Name + " [ ADSB | SIC =" + element.SIC + "]"
-            };
-            items.push(plot);
-            var circlePlot = {
-                type: 'circle',
-                radius: 500 * 1000,
-                latlngs: {
+        if (points.length >0 )
+        {
+            angular.forEach(points, function (element) {
+                plot = {
+                    layer: 'adsb',
                     lat: element.Lat,
-                    lng: element.Lng
-                },
-                layer: 'coverageADSB',
-                opacity: 0.2,
-                weight:0.3,
-                fillColor: 'blue',
-                fillOpacity:0.1
-            }
-            $scope.paths.push(circlePlot);
-        });
+                    lng: element.Lng,
+                    icon: icons.adsb,
+                    message: element.Name + " [ ADSB | SIC =" + element.SIC + "]"
+                };
+                items.push(plot);
+                var circlePlot = {
+                    type: 'circle',
+                    radius: 300 * 1000,
+                    latlngs: {
+                        lat: element.Lat,
+                        lng: element.Lng
+                    },
+                    layer: 'coverageADSB',
+                    opacity: 0.2,
+                    weight: 0.3,
+                    fillColor: 'blue',
+                    fillOpacity: 0.1
+                }
+                $scope.paths.push(circlePlot);
+            });
+        }
+        else {
+            console.log("Error ADSBPosition data upload");
+        }
     }
 
     var uploadSSR = function (points) {
-        angular.forEach(points, function (element) {
-            plot = {
-                layer: 'ssr',
-                lat: element.Lat,
-                lng: element.Lng,
-                icon: icons.ssr,
-                message: element.Name + " [ SSR | SIC =" + element.SIC + "]"
-            };
-            items.push(plot);
-            var circlePlot = {
-                type: 'circle',
-                radius: 500 * 1000,
-                latlngs: {
+        if (points.length > 0) {
+            angular.forEach(points, function (element) {
+                plot = {
+                    layer: 'ssr',
                     lat: element.Lat,
-                    lng: element.Lng
-                },
-                layer: 'coverageSSR',
-                opacity: 0.1,
-                weight: 0.3,
-                fillColor: 'red',
-                fillOpacity: 0.1
-            }
-            $scope.paths.push(circlePlot);
-        });
+                    lng: element.Lng,
+                    icon: icons.ssr,
+                    message: element.Name + " [ SSR | SIC =" + element.SIC + "]"
+                };
+                items.push(plot);
+                var circlePlot = {
+                    type: 'circle',
+                    radius: 250 * 1000,
+                    latlngs: {
+                        lat: element.Lat,
+                        lng: element.Lng
+                    },
+                    layer: 'coverageSSR',
+                    opacity: 0.1,
+                    weight: 0.3,
+                    fillColor: 'red',
+                    fillOpacity: 0.1
+                }
+                $scope.paths.push(circlePlot);
+            });
+        }
+        else {
+            console.log("Error SSRPosition data upload");
+        }
     }
 
     var icons = {
@@ -104,24 +129,10 @@
             iconSize: [20, 30]
         },
         ssr: {
-            iconUrl: '/images/red-marker.png',
+            iconUrl: '/images/map-marker-icon.png',
             iconSize: [30, 30]
         }
     }
-
-    var pathsDict = {
-        circle: {
-            type: "circle",
-            radius: 500 * 1000,
-            latlngs: {
-                lat: 13.715560,
-                lng: 100.540599
-            }
-        }
-    }
-
-    
-
 
     var init = function () {
         angular.extend($scope, {
@@ -205,7 +216,6 @@
 
            }, function error(response) {}
         ).finally(function () {});
-        console.log(items);
         $scope.markers = items;
 
 

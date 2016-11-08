@@ -19,28 +19,42 @@ namespace SUREF.Controllers
         [HttpGet]
         public JsonResult getAdsb()
         {
-            Surveillance sur = new Surveillance();
-            List<SurveillanceModel> result = new List<SurveillanceModel>();
-            string path = ControllerContext.HttpContext.Server.MapPath("~/DataConfig/ADSBPosition.xml");
-            result= sur.GetData(path);
-            if (result == null)
+            try
             {
-                return Json(new  { status = false}, JsonRequestBehavior.AllowGet);
+                Surveillance sur = new Surveillance();
+                List<SurveillanceModel> result = new List<SurveillanceModel>();
+                string path = ControllerContext.HttpContext.Server.MapPath("~/DataConfig/ADSBPosition.xml");
+                result = sur.GetData(path);
+                if (result == null)
+                {
+                    return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return null;
+            }
         }
         [HttpGet]
         public JsonResult getSSR()
         {
-            Surveillance sur = new Surveillance();
-            List<SurveillanceModel> result = new List<SurveillanceModel>();
-            string path = ControllerContext.HttpContext.Server.MapPath("~/DataConfig/SSRPosition.xml");
-            result = sur.GetData(path);
-            if (result == null)
+            try
             {
-                return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+                Surveillance sur = new Surveillance();
+                List<SurveillanceModel> result = new List<SurveillanceModel>();
+                string path = ControllerContext.HttpContext.Server.MapPath("~/DataConfig/SSRPosition.xml");
+                result = sur.GetData(path);
+                if (result == null)
+                {
+                    return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            catch
+            {
+                return null;
+            }
         }
     }
 }
