@@ -16,6 +16,7 @@ namespace SUREF.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public JsonResult getAdsb()
         {
@@ -56,5 +57,24 @@ namespace SUREF.Controllers
                 return null;
             }
         }
+        [HttpGet]
+        public JsonResult getTrack(int sensor,string date,string id)
+        {
+            try
+            {
+                string path = ControllerContext.HttpContext.Server.MapPath("~/Data/" + sensor + "/" + date + "/" + id);
+                List<List<object>> result = GetJsonData.getData(path,date);
+                if (result == null)
+                {
+                    return Json(new { status = false }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

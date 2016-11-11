@@ -73,3 +73,5 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SU
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.pdb
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.web.csprojResolveAssemblyReference.cache
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.pdb
