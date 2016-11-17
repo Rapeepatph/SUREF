@@ -27,7 +27,8 @@ namespace SUREF
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/leaflet.css"));
+                      "~/Content/leaflet.css",
+                      "~/Content/leaflet.label.css"));
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-resource.js",
@@ -37,7 +38,12 @@ namespace SUREF
             bundles.Add(new ScriptBundle("~/bundles/leaflet").Include(
                       "~/Scripts/leaflet.js",
                       "~/Scripts/app/mapFix.js",
+                      "~/Scripts/leaflet.label.js",
+                      "~/Scripts/leaflet.polylineDecorator.js",
                       "~/Scripts/angular-leaflet-directive.min.js"
+                      ));
+            bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
+                      "~/Scripts/highcharts.js"
                       ));
         }
     }

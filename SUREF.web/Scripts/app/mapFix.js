@@ -1,20 +1,107 @@
-﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', 'httpFactory', function ($scope, $http, leafletData, $q, httpFactory) {
+﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', 'httpFactory','$compile', function ($scope, $http, leafletData, $q, httpFactory,$compile) {
     var staticitems = [];
     var dynamicitems = [];
     var staticlist = [];
     var dynamiclist = [];
     var result = [];
     var plot = {};
-    $scope.date = "20161102";
+    var staticPath = [];
+    var dynamicPath = [];
+    
+
+
+    $scope.date = "20161115";
     $scope.FlightID = "71bd61";
-    $scope.paths = [];
+    $scope.paths = [];    
+
+
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.format("DD MMM YYYY HH:mm:ss.SSS");
     };
+    var getLine = function (list, lat, lng, sic, color, text,width,dash)
+    {
+        var target = list.filter(x => x.SIC == sic);
+        if (target.length != 0) {
+            var p1 = {
+                layer: 'track',
+                color: color,
+                weight: width,
+                latlngs: [
+                    { lat: target[0].Lat, lng: target[0].Lng },
+                    { lat: lat, lng: lng }
+                ],
+                dashArray: dash,
+                message: text
+            };
+            return p1;
+        }
+
+    }
+    var getColor = function (ssrList, adsbList,sic) {
+        var ssrTarget = ssrList.filter(x => x.SIC == sic);
+        if (ssrTarget.length != 0) {
+            return 'red';
+        }
+        else {
+            return 'blue';
+        }
+    }
+    $scope.createPathToSur = function (lat, lng, sic, typ, sicList,cat) {
+        var adsbList = staticlist[0].$$state.value.data;
+        var ssrList = staticlist[1].$$state.value.data;
+        var list = ssrList.concat(adsbList);
+        var color = '';
+        dynamicPath = [];
+        
+        color = getColor(ssrList, adsbList, sic);
+
+        var line = getLine(list, lat, lng, sic,color,'selected',6,null);
+        if (line != null) dynamicPath.push(line);
+        var aList = sicList.split('_');
+        console.log(aList);
+        aList.forEach(function (entry) {
+            if (entry != sic) {
+                color = getColor(ssrList, adsbList, entry);
+                var templine = getLine(list, lat, lng, entry, color, 'available',3,'5,10');
+                if (templine != null) dynamicPath.push(templine);
+            }
+        });        
+
+        $scope.paths = mergeList(staticPath, dynamicPath);
+    };
     
+    var mergeList = function (staticData, dynamicData) {
+        result = [];
+        staticData.forEach(function (entry) { result.push(entry) });
+        dynamicData.forEach(function (entry) { result.push(entry) });
+        return result;
+    }
+    
+    var getPathtoSur = function (ap, type) {
+
+        var sicList = ap[5].join('_');
+        sicList = "'" + sicList + "'";
+        var adsbTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] + ',' + 0 + ',' +sicList +','+ap[6]+ ')"></span>';
+        var adsbLinkFn = $compile(angular.element(adsbTitle));
+        var adsbPopup = adsbLinkFn($scope);
+
+        var ssrTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] + ',' + 1 + ',' + sicList + ',' + ap[6] + ')"></span>';
+        var ssrLinkFn = $compile(angular.element(ssrTitle));
+        var ssrPopup = ssrLinkFn($scope);
+
+        if (type == "adsb")
+        {
+            return "[ADSB] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + adsbPopup[0].outerHTML;
+            
+        }
+        else
+        {
+            return "[SSR] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + ssrPopup[0].outerHTML;
+        }
+    };
+        
     var adsbTrack = function (points) {
-        console.log("adsb"+points.length);
         if (points.length > 0)
         {
             return points.map(function (ap) {
@@ -23,7 +110,8 @@
                     lat: ap[1],
                     lng: ap[2],
                     icon: icons.blue,
-                    message: "[ADSB]" + getDateTime(ap[0]) + " - [ " + ap[1] + ", " + ap[2] + " ]"
+                    message: getPathtoSur(ap, "adsb"),
+                    getMessageScope: function () { return $scope; }
                 });
             });
         }
@@ -42,7 +130,8 @@
                     lat: ap[1],
                     lng: ap[2],
                     icon: icons.red,
-                    message: "[SSR]" + "<p> " + getDateTime(ap[0]) + " <p> [ " + ap[1] + ", " + ap[2] + " ]" + "<p>" + "Height :" + ap[3]                   
+                    message: getPathtoSur(ap, "ssr"),
+                    getMessageScope: function () { return $scope; }
                 });
             });
         }
@@ -77,7 +166,7 @@
                     fillColor: 'blue',
                     fillOpacity: 0.1
                 }
-                $scope.paths.push(circlePlot);
+                staticPath.push(circlePlot);
             });
         }
         else {
@@ -109,7 +198,7 @@
                     fillColor: 'red',
                     fillOpacity: 0.1
                 }
-                $scope.paths.push(circlePlot);
+                staticPath.push(circlePlot);
             });
         }
         else {
@@ -142,17 +231,15 @@
 
     $scope.loadData = function () {
         dynamiclist = [];
+        dynamicPath = [];
         dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + $scope.date + '&id=' + $scope.FlightID));
         dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + $scope.date + '&id=' + $scope.FlightID));
         $q.all(dynamiclist).then(function success(res) {
             dynamicitems = [];
             adsbTrack(res[0].data);
             ssrTrack(res[1].data);
-            result = [];
-            staticitems.forEach(function (entry) { result.push(entry) });
-            dynamicitems.forEach(function (entry) { result.push(entry) });
-            $scope.markers = result;
-            console.log(staticlist);
+            $scope.markers = mergeList(staticitems, dynamicitems);
+            $scope.paths = mergeList(staticPath, dynamicPath);
 
         }, function error(response) { }
         ).finally(function () { });
@@ -200,6 +287,15 @@
                         visible: false
                     }
                 },
+                decorations: {
+                    markers: {
+                        coordinates: [[51.9, -0.4], [51.505, -0.09], [51.0, -0.4]],
+                        patterns: [
+                            { offset: 12, repeat: 25, symbol: L.Symbol.dash({ pixelSize: 10, pathOptions: { color: '#f00', weight: 2 } }) },
+                            { offset: 0, repeat: 25, symbol: L.Symbol.dash({ pixelSize: 0 }) }
+                        ]
+                    }
+                }
 },
             toggleLayer: function (type) {
                 $scope.layers.overlays[type].visible = !$scope.layers.overlays[type].visible;
@@ -216,29 +312,12 @@
             
             uploadAdsb(res[0].data);
             uploadSSR(res[1].data);
-            //leafletData.getMap("map").then(
-            //    function (map) {
-            //        var coverage = new L.layerGroup();
-            //        for (var n = 0; n < circlePlots.length; n++) {
-            //            var circle = L.circle([circlePlots[n].lat,circlePlots[n].lng], {
-            //                color: 'green',
-            //                fillColor: '#f03',
-            //                fillOpacity: 0.5,
-            //                radius: 50000
-            //            }).addTo(coverage);
-            //        }
-            //        var baseLayers = {
-
-            //        };
-            //        var overlays = {
-            //            "Coverage": coverage
-            //        };
-            //        L.control.layers(baseLayers, overlays).addTo(map);
-            //    }
-            //   );
-
            }, function error(response) {}
-        ).finally(function () { });
+        ).finally(function () {
+            $scope.paths = staticPath;
+        });
+
+
         $scope.loadData();        
         httpFactory.http('/Map/getSSR').then(function(result){
             console.log(result.length);

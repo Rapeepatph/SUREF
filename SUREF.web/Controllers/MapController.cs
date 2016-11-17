@@ -16,7 +16,10 @@ namespace SUREF.Controllers
         {
             return View();
         }
-
+        public ActionResult testMap()
+        {
+            return View();
+        }
         [HttpGet]
         public JsonResult getAdsb()
         {

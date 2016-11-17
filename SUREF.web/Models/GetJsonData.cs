@@ -25,25 +25,32 @@ namespace SUREF.Models
                         IMetaDataS meta = new MetaDataS();
                         meta.StringToObj(line);
                         DateTime dt = getDateTime(date, meta.TimeOfDay);
+                        if (meta.Latitude == null) continue;
                         double latitude = meta.Latitude.Value;
+                        if (meta.Longitude == null) continue;
                         double longitude = meta.Longitude.Value;
                         double? height = (meta.Cat == 21) ? meta.GeometricHeight : meta.GeometricAltitude;
                         short sic = meta.SelectedSIC;
+                        int cat = meta.Cat;
                         List<string> source = meta.Source;
                         List<short> sic_list = new List<short>();
-                        foreach (string item in source)
+                        if(source !=null)
                         {
-                            string[] element = item.Split(',');
-                            sic_list.Add(Int16.Parse(element[1]));
+                            foreach (string item in source)
+                            {
+                                string[] element = item.Split(',');
+                                sic_list.Add(Int16.Parse(element[1]));
+                            }
                         }
                         List<object> each = new List<object>();
                         //string eachPoint = dt.ToString("yyyy-MM-dd hh:mm:ss.fff") + "," + latitude + "," + longitude + "," + sic.ToString() + "," + JsonConvert.SerializeObject(sic_list);                
-                        each.Add(dt.ToString("yyyy-MM-dd hh:mm:ss.fff"));
+                        each.Add(dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                         each.Add(latitude);
                         each.Add(longitude);
                         each.Add((height == null)?"n/a": height.Value.ToString());
                         each.Add(sic);
                         each.Add(sic_list);
+                        each.Add(cat);
                         result.Add(each);
                     }
                     catch(Exception ex)

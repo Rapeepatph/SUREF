@@ -10,6 +10,9 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\ro
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\roslyn\vbc.exe
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\roslyn\VBCSCompiler.exe
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.dll.config
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.pdb
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Antlr3.Runtime.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\EntityFramework.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\EntityFramework.SqlServer.dll
@@ -29,6 +32,7 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Mi
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Newtonsoft.Json.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Owin.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Net.Http.Formatting.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.Helpers.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.Http.dll
@@ -41,6 +45,8 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Sy
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.WebPages.Razor.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\WebGrease.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Newtonsoft.Json.xml
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.pdb
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Net.Http.Formatting.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.Http.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.Http.WebHost.xml
@@ -52,7 +58,6 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Sy
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\System.Web.WebPages.Razor.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Antlr3.Runtime.pdb
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Newtonsoft.Json.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\EntityFramework.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\EntityFramework.SqlServer.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.AspNet.Identity.Core.xml
@@ -67,11 +72,6 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Mi
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.dll.config
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.dll
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.pdb
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.web.csprojResolveAssemblyReference.cache
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.pdb
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.web.csprojResolveAssemblyReference.cache
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.dll
-C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SurveillanceDataKeeper.pdb
