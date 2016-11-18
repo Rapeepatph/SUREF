@@ -7,18 +7,116 @@
     var plot = {};
     var staticPath = [];
     var dynamicPath = [];
-    
-
-
-    $scope.date = "20161115";
-    $scope.FlightID = "71bd61";
-    $scope.paths = [];    
-
-
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.format("DD MMM YYYY HH:mm:ss.SSS");
     };
+
+    var getTimeForChart = function (s) {
+        var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
+        return d.valueOf();
+    }
+    $scope.date = "20161115";
+    $scope.FlightID = "71bd61";
+    $scope.paths = [];
+    $scope.adsbDataChart = [];
+    $scope.ssrDataChart = [];
+    $scope.chartConfig = {
+        options: {
+            chart: {
+                type:'scatter'
+            },
+            tooltip: {
+                formatter: function () {
+                    return "Time = "+moment(this.x).utc().format('HH:mm:ss.SSS') + ", Altitude = " + this.y;
+                }
+            }
+            
+        },
+        title: {
+            text: 'Height Versus Time of Flight ' + $scope.FlightID
+        },
+        series: [
+            {
+                data: $scope.adsbDataChart,
+                name: 'ADSB',
+                color:'blue',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            },
+            {
+                data: $scope.ssrDataChart,
+                name: 'SSR',
+                color:'red',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            }
+        ],
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: "%H:%M:%S.%L"
+            }
+        },
+        yAxis:{
+            title: {
+                text: 'Altitude (feet)'
+            }
+        },
+        //size: {
+        //    width: 400,
+        //    height: 300
+        //},
+    };
+ 
+    //test chart another technique
+    $scope.chartOptions = {
+        title: {
+            text: 'Height Data'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+
+        series: [{
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        }]
+    };
+    $scope.pieData = [{
+        name: "Microsoft Internet Explorer",
+        y: 56.33
+    }, {
+        name: "Chrome",
+        y: 24.03,
+        sliced: true,
+        selected: true
+    }, {
+        name: "Firefox",
+        y: 10.38
+    }, {
+        name: "Safari",
+        y: 4.77
+    }, {
+        name: "Opera",
+        y: 0.91
+    }, {
+        name: "Proprietary or Undetectable",
+        y: 0.2
+    }];
+    $scope.columnData = [{
+        name: $scope.FlightID,
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    }]
+    //end
+
+
+    
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
     {
         var target = list.filter(x => x.SIC == sic);
@@ -105,6 +203,8 @@
         if (points.length > 0)
         {
             return points.map(function (ap) {
+                var plot = [getTimeForChart(ap[0]),parseFloat(ap[3])];
+                $scope.adsbDataChart.push(plot);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -125,6 +225,8 @@
     var ssrTrack = function (points) {
         if (points.length > 0) {
             return points.map(function (ap) {
+                var plot = [getTimeForChart(ap[0]), parseFloat(ap[3])];
+                $scope.ssrDataChart.push(plot);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -226,12 +328,19 @@
         ssr: {
             iconUrl: '/images/map-marker-icon.png',
             iconSize: [30, 30]
+        },
+        tri: {
+            type: 'div',
+            iconSize: [10, 10],
+            className: 'triangle',
+            iconAnchor: [5, 5]
         }
     }
 
     $scope.loadData = function () {
         dynamiclist = [];
         dynamicPath = [];
+        $scope.chartConfig.title.text = 'Height Versus Time of Flight ' + $scope.FlightID;
         dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + $scope.date + '&id=' + $scope.FlightID));
         dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + $scope.date + '&id=' + $scope.FlightID));
         $q.all(dynamiclist).then(function success(res) {

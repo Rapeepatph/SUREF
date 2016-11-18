@@ -10,6 +10,13 @@
         opacity: .75;
         background-color: #0000FF;
     }
+    .triangle{
+        width: 0; 
+        height: 0; 
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid black;
+    }
     svg{
 width: 100%;
 height: 100%;
@@ -22,16 +29,43 @@ height: 100%;
 
 
 <div ng-controller="mapController" class="row content">
-    <div class="col-md-2 container">
-        <h4>Date : <input ng-model="date" /></h4>
-        <h4>Filght ID : <input ng-model="FlightID" /></h4>
-        <button ng-click="loadData()">EXECUTE</button>
+    <div class="col-md-2 ">
+        <form>
+            <div class="form-group">
+                <label for="Date">Date : </label>
+                <input ng-model="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label >Filght ID : {{FlightID}}</label>
+                <input ng-model="FlightID" class="form-control">
+            </div>
+            <button  type="submit" ng-click="loadData()">EXECUTE</button>
+        </form>
     </div>
     <div class="col-md-10 container-fluid">
-        <hr width="100%"/>
-        <leaflet id="map" lf-center="bangkok" markers="markers" paths="paths" decorations="decorations" layers="layers" width="100%" height="900px"></leaflet>
+        <hr width="100%" />
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <leaflet id="map" lf-center="bangkok" markers="markers" paths="paths" decorations="decorations" layers="layers" width="100%" height="550px"></leaflet>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Height Chart</h3>
+            </div>
+            
+            <div class="panel-body">
+                <highchart id="chart1" config="chartConfig"></highchart>
+                @*<div class="col-md-6">
+                    <hc-column-chart title="Height Data" data="columnData" options="ColumnchartOptions"></hc-column-chart>
+                </div>
+                <div class="col-md-6">
+                    <hc-pie-chart title="Browser usage" data="pieData">Placeholder for pie chart</hc-pie-chart>
+                </div>*@
+            </div>
+            
+       </div>
     </div>
-    
 </div>
 
 

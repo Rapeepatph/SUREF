@@ -43,7 +43,11 @@ namespace SUREF
                       "~/Scripts/angular-leaflet-directive.min.js"
                       ));
             bundles.Add(new ScriptBundle("~/bundles/highcharts").Include(
-                      "~/Scripts/highcharts.js"
+                      //"~/Scripts/highcharts.js",
+                      "~/Scripts/highcharts.src.js",
+                      "~/Scripts/app/chart.js",
+                      "~/Scripts/app/getChart.js",
+                      "~/Scripts/highcharts-ng.js"
                       ));
         }
     }

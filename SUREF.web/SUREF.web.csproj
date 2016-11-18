@@ -248,6 +248,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\chart.js" />
+    <Content Include="Scripts\app\getChart.js" />
     <Content Include="Scripts\app\mapFix.js" />
     <Content Include="Scripts\app\services.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -753,7 +755,9 @@
     <Content Include="Data\2\20161115\4bb1c5" />
     <None Include="Properties\PublishProfiles\suref-web.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\highcharts-ng.js" />
     <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\highcharts.src.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
