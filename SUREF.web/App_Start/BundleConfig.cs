@@ -28,12 +28,17 @@ namespace SUREF
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/leaflet.css",
-                      "~/Content/leaflet.label.css"));
+                      "~/Content/leaflet.label.css",
+                      "~/Content/ng-table.css"));
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
+                      "~/Scripts/angular-route.js",
                       "~/Scripts/angular-resource.js",
                       "~/Scripts/app/app.js",
-                      "~/Scripts/app/services.js"
+                      "~/Scripts/app/services.js",
+                      "~/Scripts/app/flight.js",
+                      "~/Scripts/ng-table.js",
+                      "~/Scripts/ui-bootstrap-tpls.js"
                       ));
             bundles.Add(new ScriptBundle("~/bundles/leaflet").Include(
                       "~/Scripts/leaflet.js",

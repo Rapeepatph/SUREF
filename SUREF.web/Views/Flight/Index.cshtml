@@ -1,0 +1,30 @@
+﻿
+<div ng-controller="flightController" class="container">
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <p class="input-group">
+                <input type="text" id="input1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="strtdate" is-open="popup1.opened" datepicker-options="dateOptions" placeholder="Start Date . . ." ng-click="open1()" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="panel panel-body">
+            <table ng-table="tableParams" class="table  table-hover table-condensed ">
+                <tr ng-repeat="row in $data">
+                    <td data-title="'ID'" sortable="'Id'" filter="{Id: 'number'}">{{row.Id}}</td>
+                    <td data-title="'AircraftID'" sortable="'AircraftID'" filter="{AircraftID: 'text'}" hre>{{row.AircraftID}}</td>
+                    <td>
+                        <a href="/map/index/{{row.AircraftID}}">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

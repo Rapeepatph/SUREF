@@ -1,4 +1,6 @@
-﻿using SUREF.Models;
+﻿using SUREF.Data.Models;
+using SUREF.Models;
+using SUREF.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,11 @@ namespace SUREF.Controllers
     [Authorize]
     public class MapController : Controller
     {
-        
+        private App app = new App(testing: false);
         // GET: Map
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
+            ViewBag.AircraftID = id;
             return View();
         }
         public ActionResult testMap()
@@ -73,11 +76,16 @@ namespace SUREF.Controllers
                 }
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return null;
             }
         }
-
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) app.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

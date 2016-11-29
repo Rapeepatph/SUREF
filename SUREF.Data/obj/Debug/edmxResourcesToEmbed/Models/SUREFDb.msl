@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SUREFModelStoreContainer" CdmEntityContainer="SUREFDb">
+    <EntitySetMapping Name="FlightViews">
+      <EntityTypeMapping TypeName="SUREFModel.FlightView">
+        <MappingFragment StoreEntitySet="FlightView">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SensorID" ColumnName="SensorID" />
+          <ScalarProperty Name="DateofFlight" ColumnName="DateofFlight" />
+          <ScalarProperty Name="AircraftID" ColumnName="AircraftID" />
+          <ScalarProperty Name="CallSign" ColumnName="CallSign" />
+          <ScalarProperty Name="Mode3ACode" ColumnName="Mode3ACode" />
+          <ScalarProperty Name="TrackID" ColumnName="TrackID" />
+          <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+          <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+          <ScalarProperty Name="C5M_NR" ColumnName="5M_NR" />
+          <ScalarProperty Name="C5M_NT" ColumnName="5M_NT" />
+          <ScalarProperty Name="C5M_NC_V" ColumnName="5M_NC_V" />
+          <ScalarProperty Name="C5M_NC_I" ColumnName="5M_NC_I" />
+          <ScalarProperty Name="C5M_R2" ColumnName="5M_R2" />
+          <ScalarProperty Name="C5M_R7" ColumnName="5M_R7" />
+          <ScalarProperty Name="C5M_R14" ColumnName="5M_R14" />
+          <ScalarProperty Name="C5R_NR" ColumnName="5R_NR" />
+          <ScalarProperty Name="C5R_NT" ColumnName="5R_NT" />
+          <ScalarProperty Name="C5R_NC_V" ColumnName="5R_NC_V" />
+          <ScalarProperty Name="C5R_NC_I" ColumnName="5R_NC_I" />
+          <ScalarProperty Name="C5R_R2" ColumnName="5R_R2" />
+          <ScalarProperty Name="C5R_R7" ColumnName="5R_R7" />
+          <ScalarProperty Name="C5R_R14" ColumnName="5R_R14" />
+          <ScalarProperty Name="C3M_NR" ColumnName="3M_NR" />
+          <ScalarProperty Name="C3M_NT" ColumnName="3M_NT" />
+          <ScalarProperty Name="C3M_NC_V" ColumnName="3M_NC_V" />
+          <ScalarProperty Name="C3M_NC_I" ColumnName="3M_NC_I" />
+          <ScalarProperty Name="C3M_R2" ColumnName="3M_R2" />
+          <ScalarProperty Name="C3M_R7" ColumnName="3M_R7" />
+          <ScalarProperty Name="C3M_R14" ColumnName="3M_R14" />
+          <ScalarProperty Name="C3R_NR" ColumnName="3R_NR" />
+          <ScalarProperty Name="C3R_NT" ColumnName="3R_NT" />
+          <ScalarProperty Name="C3R_NC_V" ColumnName="3R_NC_V" />
+          <ScalarProperty Name="C3R_NC_I" ColumnName="3R_NC_I" />
+          <ScalarProperty Name="C3R_R2" ColumnName="3R_R2" />
+          <ScalarProperty Name="C3R_R7" ColumnName="3R_R7" />
+          <ScalarProperty Name="C3R_R14" ColumnName="3R_R14" />
+          <ScalarProperty Name="NUCP" ColumnName="NUCP" />
+          <ScalarProperty Name="C5M_LONGGAP_COUNT" ColumnName="5M_LONGGAP_COUNT" />
+          <ScalarProperty Name="C5R_LONGGAP_COUNT" ColumnName="5R_LONGGAP_COUNT" />
+          <ScalarProperty Name="C3M_LONGGAP_COUNT" ColumnName="3M_LONGGAP_COUNT" />
+          <ScalarProperty Name="C3R_LONGGAP_COUNT" ColumnName="3R_LONGGAP_COUNT" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ProcessRound" ColumnName="ProcessRound" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MappedFlightViews">
+      <EntityTypeMapping TypeName="SUREFModel.MappedFlightView">
+        <MappingFragment StoreEntitySet="MappedFlightView">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FlightID" ColumnName="FlightID" />
+          <ScalarProperty Name="AnotherFlightID" ColumnName="AnotherFlightID" />
+          <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+          <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+          <ScalarProperty Name="ZIGMA_E_SQ" ColumnName="ZIGMA_E_SQ" />
+          <ScalarProperty Name="N" ColumnName="N" />
+          <ScalarProperty Name="RMS" ColumnName="RMS" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ProcessRound" ColumnName="ProcessRound" />
+          <ScalarProperty Name="Diagnose" ColumnName="Diagnose" />
+          <ScalarProperty Name="F1SensorID" ColumnName="F1SensorID" />
+          <ScalarProperty Name="F1AircraftID" ColumnName="F1AircraftID" />
+          <ScalarProperty Name="F1Callsign" ColumnName="F1Callsign" />
+          <ScalarProperty Name="F1Mode3ACode" ColumnName="F1Mode3ACode" />
+          <ScalarProperty Name="F1TrackID" ColumnName="F1TrackID" />
+          <ScalarProperty Name="F1TimeFrom" ColumnName="F1TimeFrom" />
+          <ScalarProperty Name="F1TimeTo" ColumnName="F1TimeTo" />
+          <ScalarProperty Name="F2SensorID" ColumnName="F2SensorID" />
+          <ScalarProperty Name="F2AircraftID" ColumnName="F2AircraftID" />
+          <ScalarProperty Name="F2Callsign" ColumnName="F2Callsign" />
+          <ScalarProperty Name="F2Mode3ACode" ColumnName="F2Mode3ACode" />
+          <ScalarProperty Name="F2TrackID" ColumnName="F2TrackID" />
+          <ScalarProperty Name="F2TimeFrom" ColumnName="F2TimeFrom" />
+          <ScalarProperty Name="F2TimeTo" ColumnName="F2TimeTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

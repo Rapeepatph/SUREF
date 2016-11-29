@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CCMS.Core">
+      <HintPath>..\SUREF.Repositories\lib\CCMS.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -186,6 +189,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapController.cs" />
@@ -193,6 +197,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FlightListViewModel.cs" />
     <Compile Include="Models\GetJsonData.cs" />
     <Compile Include="Models\SurveillanceModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -205,6 +210,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\leaflet.css" />
     <Content Include="Content\leaflet.label.css" />
+    <Content Include="Content\ng-table.css" />
+    <Content Include="Content\ng-table.min.css" />
     <Content Include="DataConfig\ADSBPosition.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -249,6 +256,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\chart.js" />
+    <Content Include="Scripts\app\flight.js" />
     <Content Include="Scripts\app\getChart.js" />
     <Content Include="Scripts\app\mapFix.js" />
     <Content Include="Scripts\app\services.js" />
@@ -1518,8 +1526,11 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ng-table.js" />
+    <Content Include="Scripts\ng-table.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1558,6 +1569,7 @@
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Map\testMap.cshtml" />
+    <Content Include="Views\Flight\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1570,6 +1582,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SUREF.Data\SUREF.Data.csproj">
+      <Project>{7113b16e-e3ff-45bf-a9b4-e37f2298e187}</Project>
+      <Name>SUREF.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SUREF.Repositories\SUREF.Repositories.csproj">
+      <Project>{49d33f83-c5b2-480e-a2c1-d1b7f3f4df86}</Project>
+      <Name>SUREF.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SUREF.Services\SUREF.Services.csproj">
+      <Project>{4693b01d-3806-4602-a51b-e8bc9e7c08b8}</Project>
+      <Name>SUREF.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

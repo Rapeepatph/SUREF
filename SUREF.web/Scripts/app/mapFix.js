@@ -1,4 +1,4 @@
-﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', 'httpFactory','$compile', function ($scope, $http, leafletData, $q, httpFactory,$compile) {
+﻿app.controller('mapController', ['$scope', '$http', 'leafletData', '$q', 'httpFactory', '$compile', '$rootScope','$routeParams', function ($scope, $http, leafletData, $q, httpFactory, $compile, $rootScope, $routeParams) {
     var staticitems = [];
     var dynamicitems = [];
     var staticlist = [];
@@ -7,6 +7,7 @@
     var plot = {};
     var staticPath = [];
     var dynamicPath = [];
+    var AircraftID = $("#myId").val();
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.format("DD MMM YYYY HH:mm:ss.SSS");
@@ -17,7 +18,7 @@
         return d.valueOf();
     }
     $scope.date = "20161115";
-    $scope.FlightID = "71bd61";
+    //$scope.FlightID = "71bd61";
     $scope.paths = [];
     $scope.adsbDataChart = [];
     $scope.ssrDataChart = [];
@@ -34,7 +35,7 @@
             
         },
         title: {
-            text: 'Height Versus Time of Flight ' + $scope.FlightID
+            text: 'Flight Level Versus Time of Flight ID ' + AircraftID
         },
         series: [
             {
@@ -64,9 +65,12 @@
         },
         yAxis:{
             title: {
-                text: 'Altitude (feet)'
-            }
+                text: 'Flight Level'
+            },
+            tickInterval: 20,
+            allowDecimals: true
         },
+        loading: true,
         //size: {
         //    width: 400,
         //    height: 300
@@ -109,7 +113,7 @@
         y: 0.2
     }];
     $scope.columnData = [{
-        name: $scope.FlightID,
+        name: AircraftID,
         data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
     }]
@@ -343,9 +347,9 @@
         $scope.ssrDataChart.length = 0;
         $scope.adsbDataChart.length = 0;
         console.log($scope.adsbDataChart);
-        $scope.chartConfig.title.text = 'Height Versus Time of Flight ' + $scope.FlightID;
-        dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + $scope.date + '&id=' + $scope.FlightID));
-        dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + $scope.date + '&id=' + $scope.FlightID));
+        $scope.chartConfig.title.text = 'Flight Level Versus Time of Flight ID ' + AircraftID;
+        dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + $scope.date + '&id=' + AircraftID));
+        dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + $scope.date + '&id=' + AircraftID));
         $q.all(dynamiclist).then(function success(res) {
             dynamicitems = [];
             adsbTrack(res[0].data);
@@ -432,7 +436,7 @@
 
         $scope.loadData();        
         httpFactory.http('/Map/getSSR').then(function(result){
-            console.log(result.length);
+            //console.log(result.length);
         });
     };
     init();

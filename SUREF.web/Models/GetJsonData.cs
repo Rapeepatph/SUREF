@@ -29,7 +29,8 @@ namespace SUREF.Models
                         double latitude = meta.Latitude.Value;
                         if (meta.Longitude == null) continue;
                         double longitude = meta.Longitude.Value;
-                        double? height = (meta.Cat == 21) ? meta.GeometricHeight : meta.GeometricAltitude;
+                        //double? height = (meta.Cat == 21) ? meta.GeometricHeight : meta.GeometricAltitude;
+                        double? height = meta.FlightLevel;
                         short sic = meta.SelectedSIC;
                         int cat = meta.Cat;
                         List<string> source = meta.Source;
@@ -53,7 +54,7 @@ namespace SUREF.Models
                         each.Add(cat);
                         result.Add(each);
                     }
-                    catch(Exception ex)
+                    catch(Exception)
                     {
                         throw;
                     }

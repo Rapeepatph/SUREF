@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SUREFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="FlightView">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="SensorID" />
+      <PropertyRef Name="DateofFlight" />
+      <PropertyRef Name="AircraftID" />
+      <PropertyRef Name="CallSign" />
+      <PropertyRef Name="Mode3ACode" />
+      <PropertyRef Name="TrackID" />
+      <PropertyRef Name="TimeFrom" />
+      <PropertyRef Name="TimeTo" />
+      <PropertyRef Name="C5M_NR" />
+      <PropertyRef Name="C5M_NT" />
+      <PropertyRef Name="C5M_NC_V" />
+      <PropertyRef Name="C5M_NC_I" />
+      <PropertyRef Name="C5M_R2" />
+      <PropertyRef Name="C5M_R7" />
+      <PropertyRef Name="C5M_R14" />
+      <PropertyRef Name="C5R_NR" />
+      <PropertyRef Name="C5R_NT" />
+      <PropertyRef Name="C5R_NC_V" />
+      <PropertyRef Name="C5R_NC_I" />
+      <PropertyRef Name="C5R_R2" />
+      <PropertyRef Name="C5R_R7" />
+      <PropertyRef Name="C5R_R14" />
+      <PropertyRef Name="C3M_NR" />
+      <PropertyRef Name="C3M_NT" />
+      <PropertyRef Name="C3M_NC_V" />
+      <PropertyRef Name="C3M_NC_I" />
+      <PropertyRef Name="C3M_R2" />
+      <PropertyRef Name="C3M_R7" />
+      <PropertyRef Name="C3M_R14" />
+      <PropertyRef Name="C3R_NR" />
+      <PropertyRef Name="C3R_NT" />
+      <PropertyRef Name="C3R_NC_V" />
+      <PropertyRef Name="C3R_NC_I" />
+      <PropertyRef Name="C3R_R2" />
+      <PropertyRef Name="C3R_R7" />
+      <PropertyRef Name="C3R_R14" />
+      <PropertyRef Name="NUCP" />
+      <PropertyRef Name="C5M_LONGGAP_COUNT" />
+      <PropertyRef Name="C5R_LONGGAP_COUNT" />
+      <PropertyRef Name="C3M_LONGGAP_COUNT" />
+      <PropertyRef Name="C3R_LONGGAP_COUNT" />
+      <PropertyRef Name="FilePath" />
+      <PropertyRef Name="CreateTime" />
+      <PropertyRef Name="ProcessRound" />
+    </Key>
+    <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SensorID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="DateofFlight" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AircraftID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CallSign" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Mode3ACode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TrackID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="C5M_NR" Type="Int32" Nullable="false" />
+    <Property Name="C5M_NT" Type="Int32" Nullable="false" />
+    <Property Name="C5M_NC_V" Type="Int32" Nullable="false" />
+    <Property Name="C5M_NC_I" Type="Int32" Nullable="false" />
+    <Property Name="C5M_R2" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5M_R7" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5M_R14" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5R_NR" Type="Int32" Nullable="false" />
+    <Property Name="C5R_NT" Type="Int32" Nullable="false" />
+    <Property Name="C5R_NC_V" Type="Int32" Nullable="false" />
+    <Property Name="C5R_NC_I" Type="Int32" Nullable="false" />
+    <Property Name="C5R_R2" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5R_R7" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5R_R14" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3M_NR" Type="Int32" Nullable="false" />
+    <Property Name="C3M_NT" Type="Int32" Nullable="false" />
+    <Property Name="C3M_NC_V" Type="Int32" Nullable="false" />
+    <Property Name="C3M_NC_I" Type="Int32" Nullable="false" />
+    <Property Name="C3M_R2" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3M_R7" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3M_R14" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3R_NR" Type="Int32" Nullable="false" />
+    <Property Name="C3R_NT" Type="Int32" Nullable="false" />
+    <Property Name="C3R_NC_V" Type="Int32" Nullable="false" />
+    <Property Name="C3R_NC_I" Type="Int32" Nullable="false" />
+    <Property Name="C3R_R2" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3R_R7" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C3R_R14" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="NUCP" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="C5M_LONGGAP_COUNT" Type="Int32" Nullable="false" />
+    <Property Name="C5R_LONGGAP_COUNT" Type="Int32" Nullable="false" />
+    <Property Name="C3M_LONGGAP_COUNT" Type="Int32" Nullable="false" />
+    <Property Name="C3R_LONGGAP_COUNT" Type="Int32" Nullable="false" />
+    <Property Name="FilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProcessRound" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MappedFlightView">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="FlightID" />
+      <PropertyRef Name="AnotherFlightID" />
+      <PropertyRef Name="TimeFrom" />
+      <PropertyRef Name="TimeTo" />
+      <PropertyRef Name="ZIGMA_E_SQ" />
+      <PropertyRef Name="N" />
+      <PropertyRef Name="RMS" />
+      <PropertyRef Name="CreateTime" />
+      <PropertyRef Name="ProcessRound" />
+      <PropertyRef Name="F1SensorID" />
+      <PropertyRef Name="F1AircraftID" />
+      <PropertyRef Name="F1Callsign" />
+      <PropertyRef Name="F1Mode3ACode" />
+      <PropertyRef Name="F1TrackID" />
+      <PropertyRef Name="F1TimeFrom" />
+      <PropertyRef Name="F1TimeTo" />
+      <PropertyRef Name="F2SensorID" />
+      <PropertyRef Name="F2AircraftID" />
+      <PropertyRef Name="F2Callsign" />
+      <PropertyRef Name="F2Mode3ACode" />
+      <PropertyRef Name="F2TrackID" />
+      <PropertyRef Name="F2TimeFrom" />
+      <PropertyRef Name="F2TimeTo" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="FlightID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="AnotherFlightID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ZIGMA_E_SQ" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="N" Type="Int32" Nullable="false" />
+    <Property Name="RMS" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProcessRound" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Diagnose" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="F1SensorID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="F1AircraftID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F1Callsign" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F1Mode3ACode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F1TrackID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F1TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="F1TimeTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="F2SensorID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="F2AircraftID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F2Callsign" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F2Mode3ACode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F2TrackID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="F2TimeFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="F2TimeTo" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="SUREFDb" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FlightViews" EntityType="Self.FlightView" />
+    <EntitySet Name="MappedFlightViews" EntityType="Self.MappedFlightView" />
+  </EntityContainer>
+</Schema>

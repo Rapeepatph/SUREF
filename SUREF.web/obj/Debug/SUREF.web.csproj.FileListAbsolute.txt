@@ -75,3 +75,10 @@ C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\Mi
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.web.csprojResolveAssemblyReference.cache
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.dll
 C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\obj\Debug\SUREF.pdb
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Data.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Services.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Data.pdb
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Services.pdb
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\CCMS.Core.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Repositories.dll
+C:\Users\Rapeepatph\Documents\Visual Studio 2015\Projects\SUREF\SUREF.web\bin\SUREF.Repositories.pdb
