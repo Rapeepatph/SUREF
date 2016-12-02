@@ -41,6 +41,11 @@ namespace SUREF.Controllers
                         item.SensorID = Flight.SensorID;
                         item.DateOfFlight = Flight.DateofFlight;
                         item.FilePath = Flight.FilePath;
+                        item.CallSign = Flight.CallSign;
+                        item.TimeFrom = Flight.TimeFrom;
+                        item.TimeTo = Flight.TimeTo;
+                        item.CreateTime = Flight.CreateTime;
+                        item.ProcessRound = Flight.ProcessRound;
                         data.Add(item);
                     }
                     return Json(data, JsonRequestBehavior.AllowGet);

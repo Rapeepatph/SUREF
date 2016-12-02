@@ -11,6 +11,11 @@ namespace SUREF.Models
         public decimal SensorID { get; set; }
         public DateTime DateOfFlight { get; set; }
         public string AircraftID { get; set; }
+        public string CallSign { get; set; }
+        public DateTime  TimeFrom { get; set; }
+        public DateTime TimeTo { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime ProcessRound { get; set; }
         public string Mode3ACode { get; set; }
         public string FilePath { get; set; }
     }

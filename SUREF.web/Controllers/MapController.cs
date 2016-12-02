@@ -4,6 +4,7 @@ using SUREF.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,9 +15,10 @@ namespace SUREF.Controllers
     {
         private App app = new App(testing: false);
         // GET: Map
-        public ActionResult Index(string id)
+        public ActionResult Index(string id,string date)
         {
             ViewBag.AircraftID = id;
+            ViewBag.Date = Regex.Replace(date, "-", "");
             return View();
         }
         public ActionResult testMap()

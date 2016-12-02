@@ -7,7 +7,8 @@
     var plot = {};
     var staticPath = [];
     var dynamicPath = [];
-    var AircraftID = $("#myId").val();
+    var AircraftID = $("#Id").val();
+    var Date =$("#Date").val();
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.format("DD MMM YYYY HH:mm:ss.SSS");
@@ -17,11 +18,13 @@
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.valueOf();
     }
-    $scope.date = "20161115";
+    //$scope.date = "20161115";
     //$scope.FlightID = "71bd61";
     $scope.paths = [];
     $scope.adsbDataChart = [];
     $scope.ssrDataChart = [];
+    $scope.adsbSICDataChart = [];
+    $scope.ssrSICDataChart = [];
     $scope.chartConfig = {
         options: {
             chart: {
@@ -76,7 +79,62 @@
         //    height: 300
         //},
     };
- 
+    $scope.chart2Config = {
+        options: {
+            chart: {
+                type: 'scatter'
+            },
+            tooltip: {
+                formatter: function () {
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + ", SIC = " + this.y;
+                }
+            }
+
+        },
+        title: {
+            text: 'SIC Versus Time of Flight ID ' + AircraftID
+        },
+        series: [
+            {
+                data: $scope.adsbSICDataChart,
+                name: 'ADSB',
+                color: 'blue',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            },
+            {
+                data: $scope.ssrSICDataChart,
+                name: 'SSR',
+                color: 'red',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            }
+        ],
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: "%H:%M:%S.%L"
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'SIC'
+            },
+            tickInterval: 20,
+            allowDecimals: true
+        },
+        loading: true,
+        //size: {
+        //    width: 400,
+        //    height: 300
+        //},
+    };
+
+
     //test chart another technique
     $scope.chartOptions = {
         title: {
@@ -209,6 +267,8 @@
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]),parseFloat(ap[3])];
                 $scope.adsbDataChart.push(plot);
+                var plotSic = [getTimeForChart(ap[0]), ap[4]];
+                $scope.adsbSICDataChart.push(plotSic);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -231,6 +291,8 @@
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]), parseFloat(ap[3])];
                 $scope.ssrDataChart.push(plot);
+                var plotSic = [getTimeForChart(ap[0]), ap[4]];
+                $scope.ssrSICDataChart.push(plotSic);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -348,8 +410,8 @@
         $scope.adsbDataChart.length = 0;
         console.log($scope.adsbDataChart);
         $scope.chartConfig.title.text = 'Flight Level Versus Time of Flight ID ' + AircraftID;
-        dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + $scope.date + '&id=' + AircraftID));
-        dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + $scope.date + '&id=' + AircraftID));
+        dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + Date + '&id=' + AircraftID));
+        dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + Date + '&id=' + AircraftID));
         $q.all(dynamiclist).then(function success(res) {
             dynamicitems = [];
             adsbTrack(res[0].data);

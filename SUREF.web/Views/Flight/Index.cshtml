@@ -1,25 +1,39 @@
 ﻿
 <div ng-controller="flightController" class="container">
-    <hr />
     <div class="row">
-        <div class="col-md-4">
-            <p class="input-group">
-                <input type="text" id="input1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="strtdate" is-open="popup1.opened" datepicker-options="dateOptions" placeholder="Start Date . . ." ng-click="open1()" />
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                </span>
-            </p>
+        <div class="page-header">
+            <h2>Search Flight : {{selectedDate}}</h2>
         </div>
     </div>
-    <hr />
+    <div class="row">
+        
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Date of Flight</span>
+                <input id="calendar" type="text" aria-describedby="input1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="strtdate" is-open="popup1.opened" datepicker-options="dateOptions" placeholder="Search Date . . ." ng-click="open1()" />
+                <span class="input-group-btn" id="input1">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default" ng-click="init()" >
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+    </div>
+    <br />
     <div class="row">
         <div class="panel panel-body">
             <table ng-table="tableParams" class="table  table-hover table-condensed ">
                 <tr ng-repeat="row in $data">
-                    <td data-title="'ID'" sortable="'Id'" filter="{Id: 'number'}">{{row.Id}}</td>
                     <td data-title="'AircraftID'" sortable="'AircraftID'" filter="{AircraftID: 'text'}" hre>{{row.AircraftID}}</td>
+                    <td data-title="'SensorID'" sortable="'SensorID'" filter="{SensorID: 'number'}">{{row.SensorID}}</td>
+                    <td data-title="'CallSign'" sortable="'CallSign'" filter="{CallSign: 'text'}">{{row.CallSign}}</td>
+                    <td data-title="'TimeFrom'" sortable="'TimeFrom'" filter="{TimeFrom: 'text'}" ng-init="timeFrom=getDate(row.TimeFrom)">{{timeFrom}}</td>
+                    <td data-title="'TimeTo'" sortable="'TimeTo'" filter="{TimeTo: 'text'}" ng-init="timeTo=getDate(row.TimeTo)">{{timeTo}}</td>
                     <td>
-                        <a href="/map/index/{{row.AircraftID}}">
+                        <a href="/map/index/{{row.AircraftID}}?date={{selectedDate}}">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                     </td>

@@ -1,16 +1,24 @@
 ﻿
 app.controller('flightController', ['$scope', '$http', 'NgTableParams', '$q', '$resource', function ($scope, $http, NgTableParams, $q, $resource) {
-    var list = [];
+    
     var data = [];
-    $scope.strtdate = new Date();
+    var today = new Date();
+    $scope.strtdate = new Date(today.setDate((today.getDate() - 1)));
+    
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
 
-        return d.format("YYYY-MM-DD");
+        return d.format("YYYY-MM-DD ");
     };
-
-    var init = function () {
+    $scope.getDate = function (dateString) {
+        var tDate = new Date(parseInt(dateString.substr(6)));
+        var d = moment(tDate, "YYYY/MM/DD HH:mm:ss.SSS");
+        return d.format("DD MMM YYYY HH:mm:ss.SSS");
+    };
+    $scope.init = function () {
+        var list = [];
         var dt = getDateTime($scope.strtdate);
+        $scope.selectedDate = dt;
         list.push($http.get('/Flight/get?dt=' + dt));
         $q.all(list).then(function success(res) {
             data = res[0].data;
@@ -22,7 +30,7 @@ app.controller('flightController', ['$scope', '$http', 'NgTableParams', '$q', '$
             })
         })
     }
-    init();
+    $scope.init();
 
     //------------- Calendar---------------------- 
     $scope.today = function () {
