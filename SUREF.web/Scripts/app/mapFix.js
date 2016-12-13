@@ -18,6 +18,12 @@
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
         return d.valueOf();
     }
+    var getNameSur = function (s) {
+        var result = staticitems.filter(function (obj) {
+            return obj.sic == s;
+        })
+        return result ? result[0].name:null;
+    }
     //$scope.date = "20161115";
     //$scope.FlightID = "71bd61";
     $scope.paths = [];
@@ -32,7 +38,7 @@
             },
             tooltip: {
                 formatter: function () {
-                    return "Time = "+moment(this.x).utc().format('HH:mm:ss.SSS') + ", Altitude = " + this.y;
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + ", Altitude = " + this.y ;
                 }
             }
             
@@ -82,11 +88,11 @@
     $scope.chart2Config = {
         options: {
             chart: {
-                type: 'scatter'
+                type: 'line'
             },
             tooltip: {
                 formatter: function () {
-                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + ", SIC = " + this.y;
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + ", SIC = " + this.y + ": " + getNameSur(this.y);
                 }
             }
 
@@ -124,14 +130,10 @@
             title: {
                 text: 'SIC'
             },
-            tickInterval: 20,
+            type:'logarithmic',
             allowDecimals: true
         },
-        loading: true,
-        //size: {
-        //    width: 400,
-        //    height: 300
-        //},
+        loading: true
     };
 
 
@@ -318,6 +320,8 @@
                     lat: element.Lat,
                     lng: element.Lng,
                     icon: icons.adsb,
+                    sic: element.SIC,
+                    name:element.Name,
                     message: element.Name + " [ ADSB | SIC =" + element.SIC + "]"
                 };
                 staticitems.push(plot);
@@ -350,6 +354,8 @@
                     lat: element.Lat,
                     lng: element.Lng,
                     icon: icons.ssr,
+                    sic: element.SIC,
+                    name: element.Name,
                     message: element.Name + " [ SSR | SIC =" + element.SIC + "]"
                 };
                 staticitems.push(plot);
