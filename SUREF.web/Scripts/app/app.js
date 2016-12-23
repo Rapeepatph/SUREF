@@ -1,5 +1,8 @@
 ﻿var app = angular.module('app', ['leaflet-directive', 'ngResource', 'highcharts-ng', 'ngTable', 'ngRoute', 'ui.bootstrap']);
 
+
+
+
 //.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     
 //    $routeProvider

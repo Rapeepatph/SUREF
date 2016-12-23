@@ -17,6 +17,9 @@ namespace SUREF.Controllers
         // GET: Map
         public ActionResult Index(string id,string date)
         {
+            var flight = app.FlightView.Query(x => x.AircraftID == id).FirstOrDefault();
+            ViewBag.TimeFrom = flight.TimeFrom.TimeOfDay;
+            ViewBag.TimeTo = flight.TimeTo.TimeOfDay;
             ViewBag.AircraftID = id;
             ViewBag.Date = Regex.Replace(date, "-", "");
             return View();

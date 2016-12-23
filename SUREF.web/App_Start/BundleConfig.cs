@@ -29,6 +29,7 @@ namespace SUREF
                       "~/Content/site.css",
                       "~/Content/leaflet.css",
                       "~/Content/leaflet.label.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/ng-table.css"));
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",

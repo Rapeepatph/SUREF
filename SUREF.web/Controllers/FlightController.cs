@@ -42,8 +42,8 @@ namespace SUREF.Controllers
                         item.DateOfFlight = Flight.DateofFlight;
                         item.FilePath = Flight.FilePath;
                         item.CallSign = Flight.CallSign;
-                        item.TimeFrom = Flight.TimeFrom;
-                        item.TimeTo = Flight.TimeTo;
+                        item.TimeFrom =  Flight.TimeFrom.ToString("MM/dd/yyyy HH:mm:ss.fff ");
+                        item.TimeTo = Flight.TimeTo.ToString("MM/dd/yyyy HH:mm:ss.fff ");
                         item.CreateTime = Flight.CreateTime;
                         item.ProcessRound = Flight.ProcessRound;
                         data.Add(item);

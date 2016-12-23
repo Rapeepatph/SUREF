@@ -21,6 +21,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/App_global.asax.dll">
       <publishTime>11/11/2016 14:47:09</publishTime>
     </File>
+    <File Include="bin/CCMS.Core.dll">
+      <publishTime>11/21/2016 16:39:28</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/21/2016 12:58:33</publishTime>
     </File>
@@ -111,11 +114,29 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>10/21/2016 12:58:36</publishTime>
     </File>
+    <File Include="bin/SUREF.Data.dll">
+      <publishTime>12/22/2016 15:14:32</publishTime>
+    </File>
+    <File Include="bin/SUREF.Data.pdb">
+      <publishTime>12/22/2016 15:14:32</publishTime>
+    </File>
     <File Include="bin/SUREF.dll">
-      <publishTime>11/18/2016 15:28:43</publishTime>
+      <publishTime>12/22/2016 15:14:33</publishTime>
     </File>
     <File Include="bin/SUREF.pdb">
-      <publishTime>11/18/2016 15:28:43</publishTime>
+      <publishTime>12/22/2016 15:14:33</publishTime>
+    </File>
+    <File Include="bin/SUREF.Repositories.dll">
+      <publishTime>12/22/2016 15:14:32</publishTime>
+    </File>
+    <File Include="bin/SUREF.Repositories.pdb">
+      <publishTime>12/22/2016 15:14:32</publishTime>
+    </File>
+    <File Include="bin/SUREF.Services.dll">
+      <publishTime>12/22/2016 15:14:33</publishTime>
+    </File>
+    <File Include="bin/SUREF.Services.pdb">
+      <publishTime>12/22/2016 15:14:33</publishTime>
     </File>
     <File Include="bin/SurveillanceDataKeeper.dll">
       <publishTime>11/15/2016 21:49:44</publishTime>
@@ -157,10 +178,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2016 12:58:30</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>11/11/2016 13:17:15</publishTime>
+      <publishTime>12/14/2016 13:00:06</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
       <publishTime>10/26/2016 13:20:51</publishTime>
+    </File>
+    <File Include="Content/font-awesome.min.css">
+      <publishTime>12/02/2016 11:54:22</publishTime>
     </File>
     <File Include="Content/leaflet-src.map">
       <publishTime>09/30/2016 12:28:32</publishTime>
@@ -170,6 +194,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/leaflet.label.css">
       <publishTime>07/18/2016 02:38:20</publishTime>
+    </File>
+    <File Include="Content/ng-table.css">
+      <publishTime>11/24/2016 11:04:44</publishTime>
+    </File>
+    <File Include="Content/ng-table.min.css">
+      <publishTime>11/24/2016 09:32:03</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>11/11/2016 13:19:56</publishTime>
@@ -5265,6 +5295,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="favicon.ico">
       <publishTime>10/21/2016 12:58:22</publishTime>
     </File>
+    <File Include="fonts/fontawesome-webfont.eot">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.svg">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.ttf">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
+    <File Include="fonts/fontawesome-webfont.woff2">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
+    <File Include="fonts/FontAwesome.otf">
+      <publishTime>12/02/2016 11:54:20</publishTime>
+    </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>10/21/2016 12:58:25</publishTime>
     </File>
@@ -5419,16 +5467,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 15:38:39</publishTime>
     </File>
     <File Include="Scripts/app/app.js">
-      <publishTime>11/17/2016 15:45:07</publishTime>
+      <publishTime>12/19/2016 11:11:39</publishTime>
     </File>
     <File Include="Scripts/app/chart.js">
       <publishTime>11/17/2016 11:17:51</publishTime>
+    </File>
+    <File Include="Scripts/app/flight.js">
+      <publishTime>12/22/2016 14:41:20</publishTime>
     </File>
     <File Include="Scripts/app/getChart.js">
       <publishTime>11/17/2016 14:57:00</publishTime>
     </File>
     <File Include="Scripts/app/mapFix.js">
-      <publishTime>11/18/2016 16:06:41</publishTime>
+      <publishTime>12/22/2016 15:13:05</publishTime>
     </File>
     <File Include="Scripts/app/services.js">
       <publishTime>11/04/2016 15:15:01</publishTime>
@@ -7731,17 +7782,26 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/moment.min.js">
       <publishTime>10/31/2016 09:44:19</publishTime>
     </File>
+    <File Include="Scripts/ng-table.js">
+      <publishTime>11/24/2016 11:04:16</publishTime>
+    </File>
+    <File Include="Scripts/ng-table.min.js">
+      <publishTime>11/24/2016 09:31:47</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>10/21/2016 12:58:30</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
       <publishTime>10/21/2016 12:58:30</publishTime>
     </File>
+    <File Include="Scripts/ui-bootstrap-tpls.js">
+      <publishTime>11/29/2016 14:21:14</publishTime>
+    </File>
     <File Include="Scripts/version.json">
       <publishTime>10/26/2016 15:38:18</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/17/2016 15:46:59</publishTime>
+      <publishTime>11/29/2016 14:21:14</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>10/21/2016 12:58:32</publishTime>
@@ -7779,6 +7839,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
       <publishTime>11/01/2016 09:17:59</publishTime>
     </File>
+    <File Include="Views/Flight/Index.cshtml">
+      <publishTime>12/22/2016 11:46:00</publishTime>
+    </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>10/21/2016 12:58:22</publishTime>
     </File>
@@ -7807,7 +7870,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2016 09:11:17</publishTime>
     </File>
     <File Include="Views/Map/Index.cshtml">
-      <publishTime>11/18/2016 11:19:12</publishTime>
+      <publishTime>12/22/2016 11:08:44</publishTime>
     </File>
     <File Include="Views/Map/testMap.cshtml">
       <publishTime>11/16/2016 13:16:37</publishTime>
@@ -7819,7 +7882,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2016 12:58:32</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>11/16/2016 15:15:50</publishTime>
+      <publishTime>12/14/2016 13:18:25</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/21/2016 12:58:32</publishTime>
@@ -7831,7 +7894,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/21/2016 12:58:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/18/2016 14:00:50</publishTime>
+      <publishTime>12/22/2016 15:15:54</publishTime>
     </File>
   </ItemGroup>
 </Project>

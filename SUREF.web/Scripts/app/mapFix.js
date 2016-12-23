@@ -8,6 +8,7 @@
     var staticPath = [];
     var dynamicPath = [];
     var AircraftID = $("#Id").val();
+    var yAxisLabels = [];
     var Date =$("#Date").val();
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
@@ -23,6 +24,49 @@
             return obj.sic == s;
         })
         return result ? result[0].name:null;
+    }
+    var change =function(sic) {
+        switch(sic){
+            case 82: return 'Suratthani SSR';
+                break;
+            case 66: return 'Phuket SSR';
+                break;
+            case 162: return 'Ubonratchathani SSR';
+                break;
+            case 50: return 'Hatyai SSR';
+                break;
+            case 98: return 'Chiang Mai SSR';
+                break;
+            case 18: return 'Donmueang SSR';
+                break;
+            case 114: return 'Pitsanulok SSR';
+                break;
+            case 146: return 'Udonthani SSR';
+                break;
+            case 178: return 'Roi-Et SSR';
+                break;
+            case 210: return 'Chumphon SSR';
+                break;
+            case 194: return 'Chiangrai SSR';
+                break;
+            case 5: return 'Tungmahamek ADSB';
+                break;
+            case 100: return 'Chiang Mai ADSB';
+                break;
+            case 51: return 'Hatyai ADSB';
+                break;
+            case 83: return 'Samui ADSB';
+                break;
+            case 163: return 'Ubonratchathani ADSB';
+                break;
+            case 147: return 'Udonthani ADSB';
+                break;
+        }
+        
+    };
+    var findIndex = function (param) {
+        var result = yAxisLabels.indexOf(param);
+        return result==-1?null:result;
     }
     //$scope.date = "20161115";
     //$scope.FlightID = "71bd61";
@@ -92,13 +136,13 @@
             },
             tooltip: {
                 formatter: function () {
-                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + ", SIC = " + this.y + ": " + getNameSur(this.y);
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : " + yAxisLabels[this.y];
                 }
             }
 
         },
         title: {
-            text: 'SIC Versus Time of Flight ID ' + AircraftID
+            text: 'Site Versus Time of Flight ID ' + AircraftID
         },
         series: [
             {
@@ -108,7 +152,8 @@
                 marker: {
                     enabled: true,
                     radius: 2
-                }
+                },
+                visible:false
             },
             {
                 data: $scope.ssrSICDataChart,
@@ -128,10 +173,17 @@
         },
         yAxis: {
             title: {
-                text: 'SIC'
+                text: 'Site Name'
             },
-            type:'logarithmic',
-            allowDecimals: true
+            tickInterval: 1,
+            labels:{
+                formatter: function (){
+                    //var result = change[this.value];
+                    //return value !== 'undefined' ? value : this.value;
+               
+                    return yAxisLabels[this.value];
+                }
+            }
         },
         loading: true
     };
@@ -269,7 +321,11 @@
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]),parseFloat(ap[3])];
                 $scope.adsbDataChart.push(plot);
-                var plotSic = [getTimeForChart(ap[0]), ap[4]];
+                if (findIndex(change(ap[4])) ==null )
+                {
+                    yAxisLabels.push(change(ap[4]));
+                }
+                var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
                 $scope.adsbSICDataChart.push(plotSic);
                 return dynamicitems.push({
                     layer: 'track',
@@ -293,7 +349,10 @@
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]), parseFloat(ap[3])];
                 $scope.ssrDataChart.push(plot);
-                var plotSic = [getTimeForChart(ap[0]), ap[4]];
+                if (findIndex(change(ap[4])) == null) {
+                    yAxisLabels.push(change(ap[4]));
+                }
+                var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
                 $scope.ssrSICDataChart.push(plotSic);
                 return dynamicitems.push({
                     layer: 'track',
@@ -412,6 +471,7 @@
     $scope.loadData = function () {
         dynamiclist = [];
         dynamicPath = [];
+        yAxisLabels = [];
         $scope.ssrDataChart.length = 0;
         $scope.adsbDataChart.length = 0;
         console.log($scope.adsbDataChart);
@@ -433,7 +493,7 @@
             bangkok: {
                 lat: 13.715560,
                 lng: 100.540599,
-                zoom: 6
+                zoom: 5
             },
             layers: {
                 baselayers: {
@@ -480,7 +540,8 @@
                         ]
                     }
                 }
-},
+            },
+
             toggleLayer: function (type) {
                 $scope.layers.overlays[type].visible = !$scope.layers.overlays[type].visible;
             }
@@ -493,7 +554,6 @@
         staticlist.push($http.get('/Map/getSSR'));
 
         $q.all(staticlist).then(function success(res) {
-            
             uploadAdsb(res[0].data);
             uploadSSR(res[1].data);
            }, function error(response) {}
@@ -508,6 +568,5 @@
         });
     };
     init();
-    
 }]);
 

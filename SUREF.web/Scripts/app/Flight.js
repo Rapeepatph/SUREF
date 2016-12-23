@@ -1,10 +1,28 @@
-﻿
-app.controller('flightController', ['$scope', '$http', 'NgTableParams', '$q', '$resource', function ($scope, $http, NgTableParams, $q, $resource) {
+﻿app.filter('customUserDateFilter', function ($filter) {
+    return function (values, dateString) {
+        var filtered = [];
+        if (typeof values != 'undefined' && typeof dateString != 'undefined') {
+            angular.forEach(values, function (value) {
+                var source = ($filter('date')(value.TimeFrom, 'DD MMM YYYY HH:mm:ss.SSS')).toLowerCase();
+                var temp = dateString.toLowerCase();
+                //if ($filter('date')(value.start_date).indexOf(dateString) >= 0) {
+                //if (temp.indexOf(" ") >=0)
+                //debugger;
+                if (source.indexOf(temp) >= 0) {
+                    filtered.push(value);
+                }
+            });
+        }
+        return filtered;
+    }
+})
+
+.controller('flightController', ['$scope', '$http', 'NgTableParams', '$q', '$resource', function ($scope, $http, NgTableParams, $q, $resource, $filter) {
     
     var data = [];
     var today = new Date();
-    $scope.strtdate = new Date(today.setDate((today.getDate() - 1)));
-    
+    //$scope.strtdate = new Date(today.setDate((today.getDate() - 1)));
+    $scope.strtdate = new Date(2016, 10, 15,10,0,0,0);
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
 
@@ -26,9 +44,9 @@ app.controller('flightController', ['$scope', '$http', 'NgTableParams', '$q', '$
                 page: 1,
                 count: 35
             }, {
-                dataset: data
+                dataset:data
             })
-        })
+        });
     }
     $scope.init();
 

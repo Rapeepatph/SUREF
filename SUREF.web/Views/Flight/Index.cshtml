@@ -2,7 +2,7 @@
 <div ng-controller="flightController" class="container">
     <div class="row">
         <div class="page-header">
-            <h2>Search Flight : {{selectedDate}}</h2>
+            <h2>Search Date : {{selectedDate}}</h2>
         </div>
     </div>
     <div class="row">
@@ -25,13 +25,12 @@
     <br />
     <div class="row">
         <div class="panel panel-body">
-            <table ng-table="tableParams" class="table  table-hover table-condensed ">
-                <tr ng-repeat="row in $data">
-                    <td data-title="'AircraftID'" sortable="'AircraftID'" filter="{AircraftID: 'text'}" hre>{{row.AircraftID}}</td>
-                    <td data-title="'SensorID'" sortable="'SensorID'" filter="{SensorID: 'number'}">{{row.SensorID}}</td>
-                    <td data-title="'CallSign'" sortable="'CallSign'" filter="{CallSign: 'text'}">{{row.CallSign}}</td>
-                    <td data-title="'TimeFrom'" sortable="'TimeFrom'" filter="{TimeFrom: 'text'}" ng-init="timeFrom=getDate(row.TimeFrom)">{{timeFrom}}</td>
-                    <td data-title="'TimeTo'" sortable="'TimeTo'" filter="{TimeTo: 'text'}" ng-init="timeTo=getDate(row.TimeTo)">{{timeTo}}</td>
+            <table ng-table="tableParams" show-filter="true" class="table  table-hover table-condensed ">
+                <tr ng-repeat="row in $data"  >
+                    <td data-title="'AircraftID'" class="text-center" sortable="'AircraftID'" filter="{AircraftID: 'text'}" hre>{{row.AircraftID}}</td>
+                    <td data-title="'CallSign'" class="text-center" sortable="'CallSign'" filter="{CallSign: 'text'}">{{row.CallSign}}</td>
+                    <td data-title="'TimeFrom'" class="text-center" sortable="'TimeFrom'" filter="{TimeFrom: 'text'}" ng-init="timeFrom=getDate(row.TimeFrom)">{{row.TimeFrom}}</td>
+                    <td data-title="'TimeTo'" class="text-center" sortable="'TimeTo'" filter="{TimeTo: 'text'}" ng-init="timeTo=getDate(row.TimeTo)">{{row.TimeTo}}</td>
                     <td>
                         <a href="/map/index/{{row.AircraftID}}?date={{selectedDate}}">
                             <span class="glyphicon glyphicon-cog"></span>

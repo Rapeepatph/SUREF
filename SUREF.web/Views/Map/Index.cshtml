@@ -30,46 +30,91 @@ height: 100%;
     <input type="hidden" id="Id" value="@ViewBag.AircraftID" />
     <input type="hidden" id="Date" value="@ViewBag.Date" />
     <div class="col-md-2 ">
-        <form>
-            <div class="form-group">
-                <label for="Date">Date : </label>
-                <input ng-model="date" class="form-control">
+        <h2>Details</h2>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-plane fa-3x" aria-hidden="true" ></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>Flight ID : @ViewBag.AircraftID </h4>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label >Filght ID : {{FlightID}}</label>
-                <input ng-model="FlightID" class="form-control">
+        </div>
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-calendar-check-o fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>Date : @ViewBag.Date </h4>
+                    </div>
+                </div>
             </div>
-            <button  type="submit" ng-click="loadData()">EXECUTE</button>
-        </form>
+        </div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-play-circle fa-4x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>Time From : @ViewBag.TimeFrom </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-stop-circle fa-4x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>Time To : @ViewBag.TimeTo </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-10 container-fluid">
         <hr width="100%" />
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <leaflet id="map" lf-center="bangkok" markers="markers" paths="paths" decorations="decorations" layers="layers" width="100%" height="550px"></leaflet>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <leaflet id="map" lf-center="bangkok" markers="markers"  paths="paths" decorations="decorations" layers="layers" width="100%" height="550px"></leaflet>
+                </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-stats"></span>  Height Chart</h3>
-            </div>
-            
-            <div class="panel-body">
-                <highchart id="chart1" config="chartConfig"></highchart>
-                @*<div class="col-md-6">
+        
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart" aria-hidden="true"></i>  Height Chart</h3>
+                </div>
+
+                <div class="panel-body">
+                    <highchart id="chart1" config="chartConfig"></highchart>
+                    @*<div class="col-md-6">
                     <hc-column-chart title="Height Data" data="columnData" options="ColumnchartOptions"></hc-column-chart>
                 </div>
                 <div class="col-md-6">
                     <hc-pie-chart title="Browser usage" data="pieData">Placeholder for pie chart</hc-pie-chart>
                 </div>*@
+                </div>
             </div>
-       </div>
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-stats"></span>  Selected SIC Chart</h3>
-            </div>
-            <div class="panel-body">
-                <highchart id="chart2" config="chart2Config"></highchart>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-line-chart" aria-hidden="true"></i>  Selected SIC Chart</h3>
+                </div>
+                <div class="panel-body">
+                    <highchart id="chart2" config="chart2Config"></highchart>
+                </div>
             </div>
         </div>
     </div>

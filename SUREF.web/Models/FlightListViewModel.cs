@@ -12,8 +12,8 @@ namespace SUREF.Models
         public DateTime DateOfFlight { get; set; }
         public string AircraftID { get; set; }
         public string CallSign { get; set; }
-        public DateTime  TimeFrom { get; set; }
-        public DateTime TimeTo { get; set; }
+        public string  TimeFrom { get; set; }
+        public string TimeTo { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime ProcessRound { get; set; }
         public string Mode3ACode { get; set; }
