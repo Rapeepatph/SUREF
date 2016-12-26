@@ -24,15 +24,17 @@ namespace SUREF.Models
                     {
                         IMetaDataS meta = new MetaDataS();
                         meta.StringToObj(line);
-                        DateTime dt = getDateTime(date, meta.TimeOfDay);
+                        DateTime dt = getDateTime(date, meta.TimeOfDay);        
                         if (meta.Latitude == null) continue;
-                        double latitude = meta.Latitude.Value;
+                        double latitude = meta.Latitude.Value;                  
                         if (meta.Longitude == null) continue;
-                        double longitude = meta.Longitude.Value;
-                        //double? height = (meta.Cat == 21) ? meta.GeometricHeight : meta.GeometricAltitude;
-                        double? height = meta.FlightLevel;
+                        double longitude = meta.Longitude.Value;                
+                        double? geoMetricheight = (meta.Cat == 21) ? meta.GeometricHeight : meta.GeometricAltitude;
+                        double? height = meta.FlightLevel;                      
                         short sic = meta.SelectedSIC;
+                        double? baroMetricAltitude = meta.BarometricAltitude;                       
                         int cat = meta.Cat;
+                        short? nucp = meta.NUCp_NIC;                                
                         List<string> source = meta.Source;
                         List<short> sic_list = new List<short>();
                         if(source !=null)
@@ -45,13 +47,16 @@ namespace SUREF.Models
                         }
                         List<object> each = new List<object>();
                         //string eachPoint = dt.ToString("yyyy-MM-dd hh:mm:ss.fff") + "," + latitude + "," + longitude + "," + sic.ToString() + "," + JsonConvert.SerializeObject(sic_list);                
-                        each.Add(dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-                        each.Add(latitude);
-                        each.Add(longitude);
-                        each.Add((height == null)?"n/a": height.Value.ToString());
-                        each.Add(sic);
-                        each.Add(sic_list);
-                        each.Add(cat);
+                        each.Add(dt.ToString("yyyy-MM-dd HH:mm:ss.fff"));               //0
+                        each.Add(latitude);                                             //1
+                        each.Add(longitude);                                            //2
+                        each.Add((height == null)?"n/a": height.Value.ToString());      //3
+                        each.Add(sic);                                                  //4
+                        each.Add(sic_list);                                             //5
+                        each.Add(cat);                                                  //6
+                        each.Add(geoMetricheight);                                      //7
+                        each.Add(baroMetricAltitude);                                   //8
+                        each.Add(nucp);                                                 //9
                         result.Add(each);
                     }
                     catch(Exception)

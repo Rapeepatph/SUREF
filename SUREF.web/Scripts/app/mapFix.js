@@ -75,6 +75,10 @@
     $scope.ssrDataChart = [];
     $scope.adsbSICDataChart = [];
     $scope.ssrSICDataChart = [];
+    $scope.ssrGeoHeightChart = [];
+    $scope.ssrBaroHeightChart = [];
+    $scope.adsbGeoHeightChart = [];
+    $scope.nucpChart = [];
     $scope.chartConfig = {
         options: {
             chart: {
@@ -187,50 +191,161 @@
         },
         loading: true
     };
+///////////////////////////////////////////////////////////////////////////////////////////
+    $scope.chart3Config = {
+        options: {
+            chart: {
+                type: 'scatter'
+            },
+            tooltip: {
+                formatter: function () {
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : FL " + this.y;
+                }
+            }
 
-
-    //test chart another technique
-    $scope.chartOptions = {
+        },
         title: {
-            text: 'Height Data'
+            text: 'Height Versus Time of Flight ID ' + AircraftID
         },
+        series: [
+            {
+                data: $scope.ssrGeoHeightChart,
+                name: 'GeoMetric',
+                color: 'green',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+                
+            },
+            {
+                data: $scope.ssrBaroHeightChart,
+                name: 'BaroMetric',
+                color: 'black',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            },
+            {
+                data: $scope.ssrDataChart,
+                name: 'Flight Level',
+                color: 'purple',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            }
+        ],
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: "%H:%M:%S.%L"
+            }
         },
-
-        series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-        }]
+        yAxis: {
+            title: {
+                text: 'Flight Level'
+            },
+            tickInterval: 20,
+            allowDecimals: true
+        },
+        loading: true
     };
-    $scope.pieData = [{
-        name: "Microsoft Internet Explorer",
-        y: 56.33
-    }, {
-        name: "Chrome",
-        y: 24.03,
-        sliced: true,
-        selected: true
-    }, {
-        name: "Firefox",
-        y: 10.38
-    }, {
-        name: "Safari",
-        y: 4.77
-    }, {
-        name: "Opera",
-        y: 0.91
-    }, {
-        name: "Proprietary or Undetectable",
-        y: 0.2
-    }];
-    $scope.columnData = [{
-        name: AircraftID,
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $scope.chart4Config = {
+        options: {
+            chart: {
+                type: 'scatter'
+            },
+            tooltip: {
+                formatter: function () {
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : FL " + this.y;
+                }
+            }
 
-    }]
-    //end
+        },
+        title: {
+            text: 'Height Versus Time of Flight ID ' + AircraftID
+        },
+        series: [
+            {
+                data: $scope.adsbGeoHeightChart,
+                name: 'GeoMetric',
+                color: 'green',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
 
+            },
+            {
+                data: $scope.adsbDataChart,
+                name: 'Flight Level',
+                color: 'purple',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+            }
+        ],
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: "%H:%M:%S.%L"
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Flight Level'
+            },
+            tickInterval: 20,
+            allowDecimals: true
+        },
+        loading: true
+    };
+//////////////////////////////////////////////////////////////////////////////////
+$scope.chart5Config = {
+        options: {
+            chart: {
+                type: 'line'
+            },
+            tooltip: {
+                formatter: function () {
+                    return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : NuCp " + this.y;
+                }
+            }
+
+        },
+        title: {
+            text: 'NuCp Versus Time of Flight ID ' + AircraftID
+        },
+        series: [
+            {
+                data: $scope.nucpChart,
+                name: 'Nucp',
+                color: 'green',
+                marker: {
+                    enabled: true,
+                    radius: 2
+                }
+
+            }
+        ],
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: "%H:%M:%S.%L"
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Flight Level'
+            },
+            allowDecimals: true
+        },
+        loading: true
+    };
 
     
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
@@ -273,7 +388,6 @@
         var line = getLine(list, lat, lng, sic,color,'selected',6,null);
         if (line != null) dynamicPath.push(line);
         var aList = sicList.split('_');
-        console.log(aList);
         aList.forEach(function (entry) {
             if (entry != sic) {
                 color = getColor(ssrList, adsbList, entry);
@@ -327,6 +441,10 @@
                 }
                 var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
                 $scope.adsbSICDataChart.push(plotSic);
+                var geoPlot = [getTimeForChart(ap[0]), ap[7] / 100];
+                $scope.adsbGeoHeightChart.push(geoPlot);
+                var nucpPlot = [getTimeForChart(ap[0]), ap[9]];
+                $scope.nucpChart.push(nucpPlot);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -354,6 +472,10 @@
                 }
                 var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
                 $scope.ssrSICDataChart.push(plotSic);
+                var geoPlot = [getTimeForChart(ap[0]), ap[7]/100];
+                $scope.ssrGeoHeightChart.push(geoPlot);
+                var baroPlot = [getTimeForChart(ap[0]), ap[8]];
+                $scope.ssrBaroHeightChart.push(baroPlot);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -474,7 +596,6 @@
         yAxisLabels = [];
         $scope.ssrDataChart.length = 0;
         $scope.adsbDataChart.length = 0;
-        console.log($scope.adsbDataChart);
         $scope.chartConfig.title.text = 'Flight Level Versus Time of Flight ID ' + AircraftID;
         dynamiclist.push($http.get('/Map/getTrack?sensor=1&date=' + Date + '&id=' + AircraftID));
         dynamiclist.push($http.get('/Map/getTrack?sensor=2&date=' + Date + '&id=' + AircraftID));
@@ -541,7 +662,12 @@
                     }
                 }
             },
-
+            events:{
+                markers: {
+                    enable: ['click']
+                    //logic: 'emit'
+                }
+            },
             toggleLayer: function (type) {
                 $scope.layers.overlays[type].visible = !$scope.layers.overlays[type].visible;
             }
@@ -568,5 +694,10 @@
         });
     };
     init();
+    $scope.$on("leafletDirectiveMarker.map.click", function (event, args) {
+        console.log(args.model);                      //test 
+        $scope.detailLat = args.model.lat;
+        $scope.detailLng = args.model.lng;
+    });
 }]);
 
