@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace SUREF.Controllers
 {
+    [Authorize]
     public class FlightController : Controller
     {
         private App app = new App();

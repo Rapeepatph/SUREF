@@ -7,6 +7,8 @@
     var plot = {};
     var staticPath = [];
     var dynamicPath = [];
+    var distributionNucps=[];
+    var nucpDatas=[];
     var AircraftID = $("#Id").val();
     var yAxisLabels = [];
     var Date =$("#Date").val();
@@ -68,6 +70,30 @@
         var result = yAxisLabels.indexOf(param);
         return result==-1?null:result;
     }
+    var findMean = function () {
+        var sum = 0;
+        for(var i =0;i<$scope.nucpChart.length;i++)
+        {
+            sum += $scope.nucpChart[i][1];
+        }
+        return sum / $scope.nucpChart.length;
+    }
+    var insertDataDistibution = function (param) {
+        var index = distributionNucps.indexOf(param);
+        if (index == -1) {
+            distributionNucps.push(param);
+            nucpDatas.push(1);
+        }
+        else {
+            nucpDatas[index] += 1;
+        }
+    }
+    var addDataToChart6 = function () {
+        for(var i=0;i<distributionNucps.length;i++)
+        {
+            $scope.nucpDistributionChart.push([distributionNucps[i], nucpDatas[i]]);
+        }
+    }
     //$scope.date = "20161115";
     //$scope.FlightID = "71bd61";
     $scope.paths = [];
@@ -79,6 +105,8 @@
     $scope.ssrBaroHeightChart = [];
     $scope.adsbGeoHeightChart = [];
     $scope.nucpChart = [];
+    $scope.nucpDistributionChart = [];
+    $scope.avgNucp = 0;
     $scope.chartConfig = {
         options: {
             chart: {
@@ -340,14 +368,47 @@ $scope.chart5Config = {
         },
         yAxis: {
             title: {
-                text: 'Flight Level'
+                text: 'Value'
             },
             allowDecimals: true
         },
         loading: true
     };
-
-    
+//////////////////////////////////////////////////////////////////////////
+$scope.chart6Config = {
+    options: {
+        chart: {
+            type: 'column'
+        }
+    },
+    title: {
+        text: 'NUCp Distribution of Flight ID ' + AircraftID
+    },
+    series: [
+        {
+            data: $scope.nucpDistributionChart,
+            name: 'Distribution NUCp',
+            color: 'green',
+            pointWidth: 25,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y}', 
+                align: 'right'
+            }
+        }
+    ],
+    xAxis: {
+        allowDecimals: true
+    },
+    yAxis: {
+        title: {
+            text: 'Frequency'
+        },
+        allowDecimals: true
+    },
+    loading: true
+};
+ ////////////////////////////////////////////////////////   
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
     {
         var target = list.filter(x => x.SIC == sic);
@@ -445,6 +506,7 @@ $scope.chart5Config = {
                 $scope.adsbGeoHeightChart.push(geoPlot);
                 var nucpPlot = [getTimeForChart(ap[0]), ap[9]];
                 $scope.nucpChart.push(nucpPlot);
+                insertDataDistibution(ap[9]);
                 return dynamicitems.push({
                     layer: 'track',
                     lat: ap[1],
@@ -603,6 +665,8 @@ $scope.chart5Config = {
             dynamicitems = [];
             adsbTrack(res[0].data);
             ssrTrack(res[1].data);
+            addDataToChart6();
+            $scope.avgNucp = findMean();
             $scope.markers = mergeList(staticitems, dynamicitems);
             $scope.paths = mergeList(staticPath, dynamicPath);
 
