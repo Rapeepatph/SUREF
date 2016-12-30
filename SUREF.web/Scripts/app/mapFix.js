@@ -370,7 +370,7 @@ $scope.chart5Config = {
             title: {
                 text: 'Value'
             },
-            allowDecimals: true
+            allowDecimals: false
         },
         loading: true
     };
@@ -379,6 +379,12 @@ $scope.chart6Config = {
     options: {
         chart: {
             type: 'column'
+        },
+        tooltip: {
+            formatter: function () {
+                return 'The frequency of '+this.x+' is <b>' 
+                     + this.y + '</b>';
+            }
         }
     },
     title: {
@@ -393,12 +399,17 @@ $scope.chart6Config = {
             dataLabels: {
                 enabled: true,
                 format: '{point.y}', 
-                align: 'right'
+                align: 'center'
             }
         }
     ],
     xAxis: {
-        allowDecimals: true
+        title: {
+            text: 'Value of NUCp'
+        },
+        allowDecimals: true,
+        min: 0,
+max:8
     },
     yAxis: {
         title: {
@@ -408,7 +419,8 @@ $scope.chart6Config = {
     },
     loading: true
 };
- ////////////////////////////////////////////////////////   
+    ////////////////////////////////////////////////////////  
+
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
     {
         var target = list.filter(x => x.SIC == sic);
@@ -481,15 +493,32 @@ $scope.chart6Config = {
 
         if (type == "adsb")
         {
-            return "[ADSB] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + adsbPopup[0].outerHTML;
-            
+            //return "[ADSB] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + adsbPopup[0].outerHTML;
+            return "[ADSB] "+adsbPopup[0].outerHTML
         }
         else
         {
-            return "[SSR] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + ssrPopup[0].outerHTML;
+            //return "[SSR] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + ssrPopup[0].outerHTML;
+            return  "[SSR] "+ ssrPopup[0].outerHTML
         }
     };
-        
+    var getdynamic = function (ap, type) {
+        var typeSur = type == 0 ? "adsb" : "ssr";
+        dynamicitems.push({
+            layer: 'track',
+            lat: ap[1],
+            lng: ap[2],
+            height: ap[3],
+            sic: ap[4],
+            cat: ap[6],
+            nucp: ap[9],
+            climbRate: ap[10],
+            dt: getDateTime(ap[0]),
+            icon: type==0?icons.blue:icons.red,
+            message: getPathtoSur(ap, typeSur),
+            getMessageScope: function () { return $scope; }
+        });
+}   
     var adsbTrack = function (points) {
         if (points.length > 0)
         {
@@ -507,14 +536,20 @@ $scope.chart6Config = {
                 var nucpPlot = [getTimeForChart(ap[0]), ap[9]];
                 $scope.nucpChart.push(nucpPlot);
                 insertDataDistibution(ap[9]);
-                return dynamicitems.push({
-                    layer: 'track',
-                    lat: ap[1],
-                    lng: ap[2],
-                    icon: icons.blue,
-                    message: getPathtoSur(ap, "adsb"),
-                    getMessageScope: function () { return $scope; }
-                });
+                return getdynamic(ap,0);
+                //return dynamicitems.push({
+                //    layer: 'track',
+                //    lat: ap[1],
+                //    lng: ap[2],
+                //    height: ap[3],
+                //    sic: ap[4],
+                //    cat: ap[6],
+                //    nucp: ap[9],
+                //    datetime:getDateTime(ap[0]),
+                //    icon: icons.blue,
+                //    message: getPathtoSur(ap, "adsb"),
+                //    getMessageScope: function () { return $scope; }
+                //});
             });
         }
         else {
@@ -538,14 +573,19 @@ $scope.chart6Config = {
                 $scope.ssrGeoHeightChart.push(geoPlot);
                 var baroPlot = [getTimeForChart(ap[0]), ap[8]];
                 $scope.ssrBaroHeightChart.push(baroPlot);
-                return dynamicitems.push({
-                    layer: 'track',
-                    lat: ap[1],
-                    lng: ap[2],
-                    icon: icons.red,
-                    message: getPathtoSur(ap, "ssr"),
-                    getMessageScope: function () { return $scope; }
-                });
+                return getdynamic(ap,1);
+                //return dynamicitems.push({
+                //    layer: 'track',
+                //    lat: ap[1],
+                //    lng: ap[2],
+                //    sic: ap[4],
+                //    cat: ap[6],
+                //    nucp: ap[9],
+                //    dt: getDateTime(ap[0]),
+                //    icon: icons.red,
+                //    message: getPathtoSur(ap, "ssr"),
+                //    getMessageScope: function () { return $scope; }
+                //});
             });
         }
         else {
@@ -762,6 +802,12 @@ $scope.chart6Config = {
         console.log(args.model);                      //test 
         $scope.detailLat = args.model.lat;
         $scope.detailLng = args.model.lng;
+        $scope.detailSic = args.model.sic;
+        $scope.detailNucp = args.model.nucp;
+        $scope.detailCat = args.model.cat;
+        $scope.detailDatetime = args.model.dt;
+        $scope.detailHeight = args.model.height;
+        $scope.detailClimbRate = args.model.climbRate;
     });
 }]);
 

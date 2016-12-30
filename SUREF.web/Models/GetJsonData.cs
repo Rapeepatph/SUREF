@@ -34,7 +34,8 @@ namespace SUREF.Models
                         short sic = meta.SelectedSIC;
                         double? baroMetricAltitude = meta.BarometricAltitude;                       
                         int cat = meta.Cat;
-                        short? nucp = meta.NUCp_NIC;                                
+                        short? nucp = meta.NUCp_NIC;         
+                        double?climbRate = meta.ClimbRate;
                         List<string> source = meta.Source;
                         List<short> sic_list = new List<short>();
                         if(source !=null)
@@ -57,6 +58,7 @@ namespace SUREF.Models
                         each.Add(geoMetricheight);                                      //7
                         each.Add(baroMetricAltitude);                                   //8
                         each.Add(nucp);                                                 //9
+                        each.Add(climbRate);                                            //10
                         result.Add(each);
                     }
                     catch(Exception)
