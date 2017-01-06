@@ -43,7 +43,7 @@ height: 100%;
                 </div>
             </div>
         </div>
-        <div class="panel panel-danger">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
@@ -55,11 +55,11 @@ height: 100%;
                 </div>
             </div>
         </div>
-        <div class="panel panel-warning">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-play-circle fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-play-circle fa-3x" aria-hidden="true"></i>
                     </div>
                     <div class="col-xs-9">
                         <h4>Time From : @ViewBag.TimeFrom </h4>
@@ -67,11 +67,11 @@ height: 100%;
                 </div>
             </div>
         </div>
-        <div class="panel panel-warning">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-stop-circle fa-4x" aria-hidden="true"></i>
+                        <i class="fa fa-stop-circle fa-3x" aria-hidden="true"></i>
                     </div>
                     <div class="col-xs-9">
                         <h4>Time To : @ViewBag.TimeTo </h4>
@@ -83,9 +83,10 @@ height: 100%;
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-info fa-3x" aria-hidden="true"></i>
+                        <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
                     </div>
                     <div class="col-xs-9">
+                        <h4>Track status</h4>
                         <a>Lat : <b>{{detailLat}} E</b></a><br />
                         <a>Lng : <b>{{detailLng}} N</b></a><br />
                         <a>SIC : <b>{{detailSic}}</b></a><br />
@@ -93,7 +94,22 @@ height: 100%;
                         <a>Cat : <b>{{detailCat}}</b></a><br />
                         <a>Height (FL) : <b>{{detailHeight}}</b></a><br />
                         <a>Climb Rate  : <b>{{detailClimbRate}}</b></a><br />
-                        <a>Update Time : <b>{{detailDatetime}}</b></a>
+                        <a>Update Time : <b>{{detailDatetime}}</b></a><br />
+                        <a>All available :</a><br />
+                        <b>{{detailAllDistance}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-info-circle fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <h4>Path Status  </h4>
+                        <b>{{detailDistance}}</b>
                     </div>
                 </div>
             </div>

@@ -420,10 +420,35 @@ max:8
     loading: true
 };
     ////////////////////////////////////////////////////////  
+    var getDistance= function(aLat,aLng,bLat,bLng){
+        var atan2 = Math.atan2
+        var cos = Math.cos
+        var sin = Math.sin
+        var sqrt = Math.sqrt
+        var PI = Math.PI
+        // (mean) radius of Earth (meters)
+        var R = 6378137
+        function squared(x) { return x * x }
+        function toRad(x) { return x * PI / 180.0 }
+        var dLat = toRad(bLat - aLat)
+        var dLon = toRad(bLng - aLng)
+        var f = squared(sin(dLat / 2.0)) + cos(toRad(aLat)) * cos(toRad(bLat)) * squared(sin(dLon / 2.0));
+        var c = 2 * atan2(sqrt(f), sqrt(1 - f));
+        var result = ((R * c) / 1000).toFixed(2);
+        return result;
+    }
+    var getNameBySIC = function (sic) {
+        var adsbList = staticlist[0].$$state.value.data;
+        var ssrList = staticlist[1].$$state.value.data;
+        var list = ssrList.concat(adsbList);
+        var target = list.filter(x=>x.SIC == sic);
+        return target;
 
+    }
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
     {
         var target = list.filter(x => x.SIC == sic);
+        var distance = getDistance(target[0].Lat, target[0].Lng, lat, lng);
         if (target.length != 0) {
             var p1 = {
                 layer: 'track',
@@ -434,11 +459,10 @@ max:8
                     { lat: lat, lng: lng }
                 ],
                 dashArray: dash,
-                message: text
+                message:target[0].Name+'('+ text + "), Distance : " + distance + " km" 
             };
             return p1;
         }
-
     }
     var getColor = function (ssrList, adsbList,sic) {
         var ssrTarget = ssrList.filter(x => x.SIC == sic);
@@ -449,28 +473,50 @@ max:8
             return 'blue';
         }
     }
-    $scope.createPathToSur = function (lat, lng, sic, typ, sicList,cat) {
+    var createPathToSur = function (lat, lng, sic, sicList, cat) {
         var adsbList = staticlist[0].$$state.value.data;
         var ssrList = staticlist[1].$$state.value.data;
         var list = ssrList.concat(adsbList);
         var color = '';
         dynamicPath = [];
-        
+
         color = getColor(ssrList, adsbList, sic);
 
-        var line = getLine(list, lat, lng, sic,color,'selected',6,null);
+        var line = getLine(list, lat, lng, sic, color, 'selected', 6, null);
         if (line != null) dynamicPath.push(line);
         var aList = sicList.split('_');
         aList.forEach(function (entry) {
             if (entry != sic) {
                 color = getColor(ssrList, adsbList, entry);
-                var templine = getLine(list, lat, lng, entry, color, 'available',3,'5,10');
+                var templine = getLine(list, lat, lng, entry, color, 'available', 3, '5,10');
                 if (templine != null) dynamicPath.push(templine);
             }
-        });        
+        });
 
         $scope.paths = mergeList(staticPath, dynamicPath);
     };
+    //$scope.createPathToSur = function (lat, lng, sic, sicList,cat) {
+    //    var adsbList = staticlist[0].$$state.value.data;
+    //    var ssrList = staticlist[1].$$state.value.data;
+    //    var list = ssrList.concat(adsbList);
+    //    var color = '';
+    //    dynamicPath = [];
+        
+    //    color = getColor(ssrList, adsbList, sic);
+
+    //    var line = getLine(list, lat, lng, sic,color,'selected',6,null);
+    //    if (line != null) dynamicPath.push(line);
+    //    var aList = sicList.split('_');
+    //    aList.forEach(function (entry) {
+    //        if (entry != sic) {
+    //            color = getColor(ssrList, adsbList, entry);
+    //            var templine = getLine(list, lat, lng, entry, color, 'available',3,'5,10');
+    //            if (templine != null) dynamicPath.push(templine);
+    //        }
+    //    });        
+
+    //    $scope.paths = mergeList(staticPath, dynamicPath);
+    //};
     
     var mergeList = function (staticData, dynamicData) {
         result = [];
@@ -479,29 +525,29 @@ max:8
         return result;
     }
     
-    var getPathtoSur = function (ap, type) {
+    //var getPathtoSur = function (ap, type) {
 
-        var sicList = ap[5].join('_');
-        sicList = "'" + sicList + "'";
-        var adsbTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] + ',' + 0 + ',' +sicList +','+ap[6]+ ')"></span>';
-        var adsbLinkFn = $compile(angular.element(adsbTitle));
-        var adsbPopup = adsbLinkFn($scope);
+    //    var sicList = ap[5].join('_');
+    //    sicList = "'" + sicList + "'";
+    //    var adsbTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] + ',' +sicList +','+ap[6]+ ')"></span>';
+    //    var adsbLinkFn = $compile(angular.element(adsbTitle));
+    //    var adsbPopup = adsbLinkFn($scope);
 
-        var ssrTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] + ',' + 1 + ',' + sicList + ',' + ap[6] + ')"></span>';
-        var ssrLinkFn = $compile(angular.element(ssrTitle));
-        var ssrPopup = ssrLinkFn($scope);
+    //    var ssrTitle = '<span  class="glyphicon glyphicon-th-large" ng-click="createPathToSur(' + ap[1] + ',' + ap[2] + ',' + ap[4] +  ',' + sicList + ',' + ap[6] + ')"></span>';
+    //    var ssrLinkFn = $compile(angular.element(ssrTitle));
+    //    var ssrPopup = ssrLinkFn($scope);
 
-        if (type == "adsb")
-        {
-            //return "[ADSB] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + adsbPopup[0].outerHTML;
-            return "[ADSB] "+adsbPopup[0].outerHTML
-        }
-        else
-        {
-            //return "[SSR] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + ssrPopup[0].outerHTML;
-            return  "[SSR] "+ ssrPopup[0].outerHTML
-        }
-    };
+    //    if (type == "adsb")
+    //    {
+    //        //return "[ADSB] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + adsbPopup[0].outerHTML;
+    //        return "[ADSB] "+adsbPopup[0].outerHTML
+    //    }
+    //    else
+    //    {
+    //        //return "[SSR] <p> Last update : " + getDateTime(ap[0]) + "<p> Position : " + ap[1] + ", " + ap[2] + "<p> " + "Height :" + ap[3] + "<p> SIC :" + ap[4] + "<p>" + ssrPopup[0].outerHTML;
+    //        return  "[SSR] "+ ssrPopup[0].outerHTML
+    //    }
+    //};
     var getdynamic = function (ap, type) {
         var typeSur = type == 0 ? "adsb" : "ssr";
         dynamicitems.push({
@@ -514,8 +560,9 @@ max:8
             nucp: ap[9],
             climbRate: ap[10],
             dt: getDateTime(ap[0]),
+            siclist:ap[5],
             icon: type==0?icons.blue:icons.red,
-            message: getPathtoSur(ap, typeSur),
+            //message: getPathtoSur(ap, typeSur),
             getMessageScope: function () { return $scope; }
         });
 }   
@@ -800,14 +847,29 @@ max:8
     init();
     $scope.$on("leafletDirectiveMarker.map.click", function (event, args) {
         console.log(args.model);                      //test 
-        $scope.detailLat = args.model.lat;
-        $scope.detailLng = args.model.lng;
-        $scope.detailSic = args.model.sic;
-        $scope.detailNucp = args.model.nucp;
-        $scope.detailCat = args.model.cat;
-        $scope.detailDatetime = args.model.dt;
-        $scope.detailHeight = args.model.height;
-        $scope.detailClimbRate = args.model.climbRate;
+        if (args.model.dt != null)
+        {
+            $scope.detailLat = args.model.lat;
+            $scope.detailLng = args.model.lng;
+            $scope.detailSic = args.model.sic;
+            $scope.detailNucp = args.model.nucp;
+            $scope.detailCat = args.model.cat;
+            $scope.detailDatetime = args.model.dt;
+            $scope.detailHeight = args.model.height;
+            $scope.detailClimbRate = args.model.climbRate;
+            $scope.detailAllDistance = '';
+            for (var i = 0; i < args.model.siclist.length; i++) {
+                var obj = getNameBySIC(args.model.siclist[i]);
+                var distance = getDistance(obj[0].Lat, obj[0].Lng, args.model.lat, args.model.lng)
+                $scope.detailAllDistance += obj[0].Name + " :" + distance+" km"+'\r\n';
+            }
+            var sicList = args.model.siclist.join('_');
+            createPathToSur(args.model.lat, args.model.lng, args.model.sic, sicList, args.model.cat)
+        }
+    });
+    $scope.$on('leafletDirectivePath.map.mouseover', function (event, path) {
+        console.log(path.leafletObject.options.message);
+        $scope.detailDistance = path.leafletObject.options.message;
     });
 }]);
 
