@@ -437,6 +437,14 @@ max:8
         var result = ((R * c) / 1000).toFixed(2);
         return result;
     }
+    var getNameBySIC = function (sic) {
+        var adsbList = staticlist[0].$$state.value.data;
+        var ssrList = staticlist[1].$$state.value.data;
+        var list = ssrList.concat(adsbList);
+        var target = list.filter(x=>x.SIC == sic);
+        return target;
+
+    }
     var getLine = function (list, lat, lng, sic, color, text,width,dash)
     {
         var target = list.filter(x => x.SIC == sic);
@@ -451,11 +459,10 @@ max:8
                     { lat: lat, lng: lng }
                 ],
                 dashArray: dash,
-                message: text + ", Distance : " + distance + " km" 
+                message:target[0].Name+'('+ text + "), Distance : " + distance + " km" 
             };
             return p1;
         }
-
     }
     var getColor = function (ssrList, adsbList,sic) {
         var ssrTarget = ssrList.filter(x => x.SIC == sic);
@@ -842,7 +849,6 @@ max:8
         console.log(args.model);                      //test 
         if (args.model.dt != null)
         {
-            var typ = null;
             $scope.detailLat = args.model.lat;
             $scope.detailLng = args.model.lng;
             $scope.detailSic = args.model.sic;
@@ -851,13 +857,13 @@ max:8
             $scope.detailDatetime = args.model.dt;
             $scope.detailHeight = args.model.height;
             $scope.detailClimbRate = args.model.climbRate;
+            $scope.detailAllDistance = '';
+            for (var i = 0; i < args.model.siclist.length; i++) {
+                var obj = getNameBySIC(args.model.siclist[i]);
+                var distance = getDistance(obj[0].Lat, obj[0].Lng, args.model.lat, args.model.lng)
+                $scope.detailAllDistance += obj[0].Name + " :" + distance+" km"+'\r\n';
+            }
             var sicList = args.model.siclist.join('_');
-            if (args.model.cat == 21) {
-                var typ = 0;
-            }
-            else if (args.model.cat == 62) {
-                var typ = 1;
-            }
             createPathToSur(args.model.lat, args.model.lng, args.model.sic, sicList, args.model.cat)
         }
     });

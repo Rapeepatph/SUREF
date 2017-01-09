@@ -227,6 +227,7 @@
     <Content Include="images\map-marker-icon.png" />
     <Content Include="images\marker-icon.png" />
     <Content Include="images\red-marker.png" />
+    <Content Include="lib\MetaDataS.txt" />
     <Content Include="lib\SurveillanceDataKeeper.dll" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />

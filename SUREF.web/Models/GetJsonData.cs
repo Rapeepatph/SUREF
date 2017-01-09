@@ -20,6 +20,7 @@ namespace SUREF.Models
                 string[] lines = System.IO.File.ReadAllLines(path);
                 foreach (string line in lines)
                 {
+                    string[] elements = line.Split('|');
                     try
                     {
                         IMetaDataS meta = new MetaDataS();
@@ -61,7 +62,7 @@ namespace SUREF.Models
                         each.Add(climbRate);                                            //10
                         result.Add(each);
                     }
-                    catch(Exception)
+                    catch(Exception ex)
                     {
                         throw;
                     }

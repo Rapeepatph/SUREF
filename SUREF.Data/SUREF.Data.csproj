@@ -54,9 +54,6 @@
     <Compile Include="Models\FlightView.cs">
       <DependentUpon>SUREFDb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MappedFlightView.cs">
-      <DependentUpon>SUREFDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SUREFDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,7 +85,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\SUREFDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

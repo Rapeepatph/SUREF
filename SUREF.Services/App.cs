@@ -20,7 +20,7 @@ namespace SUREF.Services
         }
         protected override DbContext NewDbContext()
         {
-            return new SUREFDb();
+            return new SUREFEntities();
         }
         protected override void RegisterServices()
         {

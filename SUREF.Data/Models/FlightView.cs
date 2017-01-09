@@ -23,39 +23,44 @@ namespace SUREF.Data.Models
         public string TrackID { get; set; }
         public System.DateTime TimeFrom { get; set; }
         public System.DateTime TimeTo { get; set; }
-        public int C5M_NR { get; set; }
-        public int C5M_NT { get; set; }
-        public int C5M_NC_V { get; set; }
-        public int C5M_NC_I { get; set; }
-        public decimal C5M_R2 { get; set; }
-        public decimal C5M_R7 { get; set; }
-        public decimal C5M_R14 { get; set; }
-        public int C5R_NR { get; set; }
-        public int C5R_NT { get; set; }
-        public int C5R_NC_V { get; set; }
-        public int C5R_NC_I { get; set; }
-        public decimal C5R_R2 { get; set; }
-        public decimal C5R_R7 { get; set; }
-        public decimal C5R_R14 { get; set; }
-        public int C3M_NR { get; set; }
-        public int C3M_NT { get; set; }
-        public int C3M_NC_V { get; set; }
-        public int C3M_NC_I { get; set; }
-        public decimal C3M_R2 { get; set; }
-        public decimal C3M_R7 { get; set; }
-        public decimal C3M_R14 { get; set; }
-        public int C3R_NR { get; set; }
-        public int C3R_NT { get; set; }
-        public int C3R_NC_V { get; set; }
-        public int C3R_NC_I { get; set; }
-        public decimal C3R_R2 { get; set; }
-        public decimal C3R_R7 { get; set; }
-        public decimal C3R_R14 { get; set; }
+        public int R2_5M_NR { get; set; }
+        public int R2_5M_NT { get; set; }
+        public int R7_5M_NC_V { get; set; }
+        public int R14_5M_NC_I { get; set; }
+        public decimal R2_5M { get; set; }
+        public decimal R7_5M { get; set; }
+        public decimal R14_5M { get; set; }
+        public int R2_5R_NR { get; set; }
+        public int R2_5R_NT { get; set; }
+        public int R7_5R_NC_V { get; set; }
+        public int R14_5R_NC_I { get; set; }
+        public decimal R2_5R { get; set; }
+        public decimal R7_5R { get; set; }
+        public decimal R14_5R { get; set; }
+        public int R2_3M_NR { get; set; }
+        public int R2_3M_NT { get; set; }
+        public int R7_3M_NC_V { get; set; }
+        public int R14_3M_NC_I { get; set; }
+        public decimal R2_3M { get; set; }
+        public decimal R7_3M { get; set; }
+        public decimal R14_3M { get; set; }
+        public int R2_3R_NR { get; set; }
+        public int R2_3R_NT { get; set; }
+        public int R7_3R_NC_V { get; set; }
+        public int R14_3R_NC_I { get; set; }
+        public decimal R2_3R { get; set; }
+        public decimal R7_3R { get; set; }
+        public decimal R14_3R { get; set; }
         public decimal NUCP { get; set; }
-        public int C5M_LONGGAP_COUNT { get; set; }
-        public int C5R_LONGGAP_COUNT { get; set; }
-        public int C3M_LONGGAP_COUNT { get; set; }
-        public int C3R_LONGGAP_COUNT { get; set; }
+        public int R3_5M_NG_LONGGAP_COUNT { get; set; }
+        public int R3_5R_NG_LONGGAP_COUNT { get; set; }
+        public int R3_3M_NG_LONGGAP_COUNT { get; set; }
+        public int R3_3R_NG_LONGGAP_COUNT { get; set; }
+        public decimal R8_MFL_AGE_AVG { get; set; }
+        public decimal R9_MFL_AGE_MAX { get; set; }
+        public int R11_STABLE_FLIGHT { get; set; }
+        public int R11_CLIMB_DESCEND_FLIGHT { get; set; }
+        public int R11_IDENTIFY_FLIGHT_COUNT { get; set; }
         public string FilePath { get; set; }
         public System.DateTime CreateTime { get; set; }
         public System.DateTime ProcessRound { get; set; }

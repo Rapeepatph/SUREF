@@ -73,7 +73,8 @@ namespace SUREF.Controllers
         {
             try
             {
-                string path = ControllerContext.HttpContext.Server.MapPath("~/Data/" + sensor + "/" + date + "/" + id);
+                //string path = ControllerContext.HttpContext.Server.MapPath("~/Data/" + sensor + "/" + date + "/" + id);
+                string path = "C:\\temp\\" + sensor + "\\" + date + "\\" + id;
                 List<List<object>> result = GetJsonData.getData(path,date);
                 if (result == null)
                 {

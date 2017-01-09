@@ -13,10 +13,10 @@ namespace SUREF.Data.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SUREFDb : DbContext
+    public partial class SUREFEntities : DbContext
     {
-        public SUREFDb()
-            : base("name=SUREFDb")
+        public SUREFEntities()
+            : base("name=SUREFEntities")
         {
         }
     
@@ -26,6 +26,5 @@ namespace SUREF.Data.Models
         }
     
         public virtual DbSet<FlightView> FlightViews { get; set; }
-        public virtual DbSet<MappedFlightView> MappedFlightViews { get; set; }
     }
 }

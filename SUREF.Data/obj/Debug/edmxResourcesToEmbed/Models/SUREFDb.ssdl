@@ -13,39 +13,44 @@ warning 6002: The table/view 'SUREF.dbo.FlightView' does not have a primary key 
       <PropertyRef Name="TrackID" />
       <PropertyRef Name="TimeFrom" />
       <PropertyRef Name="TimeTo" />
-      <PropertyRef Name="5M_NR" />
-      <PropertyRef Name="5M_NT" />
-      <PropertyRef Name="5M_NC_V" />
-      <PropertyRef Name="5M_NC_I" />
-      <PropertyRef Name="5M_R2" />
-      <PropertyRef Name="5M_R7" />
-      <PropertyRef Name="5M_R14" />
-      <PropertyRef Name="5R_NR" />
-      <PropertyRef Name="5R_NT" />
-      <PropertyRef Name="5R_NC_V" />
-      <PropertyRef Name="5R_NC_I" />
-      <PropertyRef Name="5R_R2" />
-      <PropertyRef Name="5R_R7" />
-      <PropertyRef Name="5R_R14" />
-      <PropertyRef Name="3M_NR" />
-      <PropertyRef Name="3M_NT" />
-      <PropertyRef Name="3M_NC_V" />
-      <PropertyRef Name="3M_NC_I" />
-      <PropertyRef Name="3M_R2" />
-      <PropertyRef Name="3M_R7" />
-      <PropertyRef Name="3M_R14" />
-      <PropertyRef Name="3R_NR" />
-      <PropertyRef Name="3R_NT" />
-      <PropertyRef Name="3R_NC_V" />
-      <PropertyRef Name="3R_NC_I" />
-      <PropertyRef Name="3R_R2" />
-      <PropertyRef Name="3R_R7" />
-      <PropertyRef Name="3R_R14" />
+      <PropertyRef Name="R2_5M_NR" />
+      <PropertyRef Name="R2_5M_NT" />
+      <PropertyRef Name="R7_5M_NC_V" />
+      <PropertyRef Name="R14_5M_NC_I" />
+      <PropertyRef Name="R2_5M" />
+      <PropertyRef Name="R7_5M" />
+      <PropertyRef Name="R14_5M" />
+      <PropertyRef Name="R2_5R_NR" />
+      <PropertyRef Name="R2_5R_NT" />
+      <PropertyRef Name="R7_5R_NC_V" />
+      <PropertyRef Name="R14_5R_NC_I" />
+      <PropertyRef Name="R2_5R" />
+      <PropertyRef Name="R7_5R" />
+      <PropertyRef Name="R14_5R" />
+      <PropertyRef Name="R2_3M_NR" />
+      <PropertyRef Name="R2_3M_NT" />
+      <PropertyRef Name="R7_3M_NC_V" />
+      <PropertyRef Name="R14_3M_NC_I" />
+      <PropertyRef Name="R2_3M" />
+      <PropertyRef Name="R7_3M" />
+      <PropertyRef Name="R14_3M" />
+      <PropertyRef Name="R2_3R_NR" />
+      <PropertyRef Name="R2_3R_NT" />
+      <PropertyRef Name="R7_3R_NC_V" />
+      <PropertyRef Name="R14_3R_NC_I" />
+      <PropertyRef Name="R2_3R" />
+      <PropertyRef Name="R7_3R" />
+      <PropertyRef Name="R14_3R" />
       <PropertyRef Name="NUCP" />
-      <PropertyRef Name="5M_LONGGAP_COUNT" />
-      <PropertyRef Name="5R_LONGGAP_COUNT" />
-      <PropertyRef Name="3M_LONGGAP_COUNT" />
-      <PropertyRef Name="3R_LONGGAP_COUNT" />
+      <PropertyRef Name="R3_5M_NG_LONGGAP_COUNT" />
+      <PropertyRef Name="R3_5R_NG_LONGGAP_COUNT" />
+      <PropertyRef Name="R3_3M_NG_LONGGAP_COUNT" />
+      <PropertyRef Name="R3_3R_NG_LONGGAP_COUNT" />
+      <PropertyRef Name="R8_MFL_AGE_AVG" />
+      <PropertyRef Name="R9_MFL_AGE_MAX" />
+      <PropertyRef Name="R11_STABLE_FLIGHT" />
+      <PropertyRef Name="R11_CLIMB_DESCEND_FLIGHT" />
+      <PropertyRef Name="R11_IDENTIFY_FLIGHT_COUNT" />
       <PropertyRef Name="FilePath" />
       <PropertyRef Name="CreateTime" />
       <PropertyRef Name="ProcessRound" />
@@ -59,97 +64,47 @@ warning 6002: The table/view 'SUREF.dbo.FlightView' does not have a primary key 
     <Property Name="TrackID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TimeFrom" Type="datetime" Nullable="false" />
     <Property Name="TimeTo" Type="datetime" Nullable="false" />
-    <Property Name="5M_NR" Type="int" Nullable="false" />
-    <Property Name="5M_NT" Type="int" Nullable="false" />
-    <Property Name="5M_NC_V" Type="int" Nullable="false" />
-    <Property Name="5M_NC_I" Type="int" Nullable="false" />
-    <Property Name="5M_R2" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5M_R7" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5M_R14" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5R_NR" Type="int" Nullable="false" />
-    <Property Name="5R_NT" Type="int" Nullable="false" />
-    <Property Name="5R_NC_V" Type="int" Nullable="false" />
-    <Property Name="5R_NC_I" Type="int" Nullable="false" />
-    <Property Name="5R_R2" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5R_R7" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5R_R14" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3M_NR" Type="int" Nullable="false" />
-    <Property Name="3M_NT" Type="int" Nullable="false" />
-    <Property Name="3M_NC_V" Type="int" Nullable="false" />
-    <Property Name="3M_NC_I" Type="int" Nullable="false" />
-    <Property Name="3M_R2" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3M_R7" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3M_R14" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3R_NR" Type="int" Nullable="false" />
-    <Property Name="3R_NT" Type="int" Nullable="false" />
-    <Property Name="3R_NC_V" Type="int" Nullable="false" />
-    <Property Name="3R_NC_I" Type="int" Nullable="false" />
-    <Property Name="3R_R2" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3R_R7" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="3R_R14" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R2_5M_NR" Type="int" Nullable="false" />
+    <Property Name="R2_5M_NT" Type="int" Nullable="false" />
+    <Property Name="R7_5M_NC_V" Type="int" Nullable="false" />
+    <Property Name="R14_5M_NC_I" Type="int" Nullable="false" />
+    <Property Name="R2_5M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R7_5M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R14_5M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R2_5R_NR" Type="int" Nullable="false" />
+    <Property Name="R2_5R_NT" Type="int" Nullable="false" />
+    <Property Name="R7_5R_NC_V" Type="int" Nullable="false" />
+    <Property Name="R14_5R_NC_I" Type="int" Nullable="false" />
+    <Property Name="R2_5R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R7_5R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R14_5R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R2_3M_NR" Type="int" Nullable="false" />
+    <Property Name="R2_3M_NT" Type="int" Nullable="false" />
+    <Property Name="R7_3M_NC_V" Type="int" Nullable="false" />
+    <Property Name="R14_3M_NC_I" Type="int" Nullable="false" />
+    <Property Name="R2_3M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R7_3M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R14_3M" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R2_3R_NR" Type="int" Nullable="false" />
+    <Property Name="R2_3R_NT" Type="int" Nullable="false" />
+    <Property Name="R7_3R_NC_V" Type="int" Nullable="false" />
+    <Property Name="R14_3R_NC_I" Type="int" Nullable="false" />
+    <Property Name="R2_3R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R7_3R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R14_3R" Type="decimal" Precision="10" Scale="4" Nullable="false" />
     <Property Name="NUCP" Type="decimal" Precision="10" Scale="4" Nullable="false" />
-    <Property Name="5M_LONGGAP_COUNT" Type="int" Nullable="false" />
-    <Property Name="5R_LONGGAP_COUNT" Type="int" Nullable="false" />
-    <Property Name="3M_LONGGAP_COUNT" Type="int" Nullable="false" />
-    <Property Name="3R_LONGGAP_COUNT" Type="int" Nullable="false" />
+    <Property Name="R3_5M_NG_LONGGAP_COUNT" Type="int" Nullable="false" />
+    <Property Name="R3_5R_NG_LONGGAP_COUNT" Type="int" Nullable="false" />
+    <Property Name="R3_3M_NG_LONGGAP_COUNT" Type="int" Nullable="false" />
+    <Property Name="R3_3R_NG_LONGGAP_COUNT" Type="int" Nullable="false" />
+    <Property Name="R8_MFL_AGE_AVG" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R9_MFL_AGE_MAX" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="R11_STABLE_FLIGHT" Type="int" Nullable="false" />
+    <Property Name="R11_CLIMB_DESCEND_FLIGHT" Type="int" Nullable="false" />
+    <Property Name="R11_IDENTIFY_FLIGHT_COUNT" Type="int" Nullable="false" />
     <Property Name="FilePath" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="ProcessRound" Type="datetime" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'SUREF.dbo.MappedFlightView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="MappedFlightView">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="FlightID" />
-      <PropertyRef Name="AnotherFlightID" />
-      <PropertyRef Name="TimeFrom" />
-      <PropertyRef Name="TimeTo" />
-      <PropertyRef Name="ZIGMA_E_SQ" />
-      <PropertyRef Name="N" />
-      <PropertyRef Name="RMS" />
-      <PropertyRef Name="CreateTime" />
-      <PropertyRef Name="ProcessRound" />
-      <PropertyRef Name="F1SensorID" />
-      <PropertyRef Name="F1AircraftID" />
-      <PropertyRef Name="F1Callsign" />
-      <PropertyRef Name="F1Mode3ACode" />
-      <PropertyRef Name="F1TrackID" />
-      <PropertyRef Name="F1TimeFrom" />
-      <PropertyRef Name="F1TimeTo" />
-      <PropertyRef Name="F2SensorID" />
-      <PropertyRef Name="F2AircraftID" />
-      <PropertyRef Name="F2Callsign" />
-      <PropertyRef Name="F2Mode3ACode" />
-      <PropertyRef Name="F2TrackID" />
-      <PropertyRef Name="F2TimeFrom" />
-      <PropertyRef Name="F2TimeTo" />
-    </Key>
-    <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="FlightID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="AnotherFlightID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="TimeFrom" Type="datetime" Nullable="false" />
-    <Property Name="TimeTo" Type="datetime" Nullable="false" />
-    <Property Name="ZIGMA_E_SQ" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="N" Type="int" Nullable="false" />
-    <Property Name="RMS" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-    <Property Name="CreateTime" Type="datetime" Nullable="false" />
-    <Property Name="ProcessRound" Type="datetime" Nullable="false" />
-    <Property Name="Diagnose" Type="text" />
-    <Property Name="F1SensorID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="F1AircraftID" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="F1Callsign" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="F1Mode3ACode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="F1TrackID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="F1TimeFrom" Type="datetime" Nullable="false" />
-    <Property Name="F1TimeTo" Type="datetime" Nullable="false" />
-    <Property Name="F2SensorID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="F2AircraftID" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="F2Callsign" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="F2Mode3ACode" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="F2TrackID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="F2TimeFrom" Type="datetime" Nullable="false" />
-    <Property Name="F2TimeTo" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityContainer Name="SUREFModelStoreContainer">
     <EntitySet Name="FlightView" EntityType="Self.FlightView" store:Type="Views" store:Schema="dbo">
@@ -163,72 +118,48 @@ warning 6002: The table/view 'SUREF.dbo.MappedFlightView' does not have a primar
     [FlightView].[TrackID] AS [TrackID], 
     [FlightView].[TimeFrom] AS [TimeFrom], 
     [FlightView].[TimeTo] AS [TimeTo], 
-    [FlightView].[5M_NR] AS [5M_NR], 
-    [FlightView].[5M_NT] AS [5M_NT], 
-    [FlightView].[5M_NC_V] AS [5M_NC_V], 
-    [FlightView].[5M_NC_I] AS [5M_NC_I], 
-    [FlightView].[5M_R2] AS [5M_R2], 
-    [FlightView].[5M_R7] AS [5M_R7], 
-    [FlightView].[5M_R14] AS [5M_R14], 
-    [FlightView].[5R_NR] AS [5R_NR], 
-    [FlightView].[5R_NT] AS [5R_NT], 
-    [FlightView].[5R_NC_V] AS [5R_NC_V], 
-    [FlightView].[5R_NC_I] AS [5R_NC_I], 
-    [FlightView].[5R_R2] AS [5R_R2], 
-    [FlightView].[5R_R7] AS [5R_R7], 
-    [FlightView].[5R_R14] AS [5R_R14], 
-    [FlightView].[3M_NR] AS [3M_NR], 
-    [FlightView].[3M_NT] AS [3M_NT], 
-    [FlightView].[3M_NC_V] AS [3M_NC_V], 
-    [FlightView].[3M_NC_I] AS [3M_NC_I], 
-    [FlightView].[3M_R2] AS [3M_R2], 
-    [FlightView].[3M_R7] AS [3M_R7], 
-    [FlightView].[3M_R14] AS [3M_R14], 
-    [FlightView].[3R_NR] AS [3R_NR], 
-    [FlightView].[3R_NT] AS [3R_NT], 
-    [FlightView].[3R_NC_V] AS [3R_NC_V], 
-    [FlightView].[3R_NC_I] AS [3R_NC_I], 
-    [FlightView].[3R_R2] AS [3R_R2], 
-    [FlightView].[3R_R7] AS [3R_R7], 
-    [FlightView].[3R_R14] AS [3R_R14], 
+    [FlightView].[R2_5M_NR] AS [R2_5M_NR], 
+    [FlightView].[R2_5M_NT] AS [R2_5M_NT], 
+    [FlightView].[R7_5M_NC_V] AS [R7_5M_NC_V], 
+    [FlightView].[R14_5M_NC_I] AS [R14_5M_NC_I], 
+    [FlightView].[R2_5M] AS [R2_5M], 
+    [FlightView].[R7_5M] AS [R7_5M], 
+    [FlightView].[R14_5M] AS [R14_5M], 
+    [FlightView].[R2_5R_NR] AS [R2_5R_NR], 
+    [FlightView].[R2_5R_NT] AS [R2_5R_NT], 
+    [FlightView].[R7_5R_NC_V] AS [R7_5R_NC_V], 
+    [FlightView].[R14_5R_NC_I] AS [R14_5R_NC_I], 
+    [FlightView].[R2_5R] AS [R2_5R], 
+    [FlightView].[R7_5R] AS [R7_5R], 
+    [FlightView].[R14_5R] AS [R14_5R], 
+    [FlightView].[R2_3M_NR] AS [R2_3M_NR], 
+    [FlightView].[R2_3M_NT] AS [R2_3M_NT], 
+    [FlightView].[R7_3M_NC_V] AS [R7_3M_NC_V], 
+    [FlightView].[R14_3M_NC_I] AS [R14_3M_NC_I], 
+    [FlightView].[R2_3M] AS [R2_3M], 
+    [FlightView].[R7_3M] AS [R7_3M], 
+    [FlightView].[R14_3M] AS [R14_3M], 
+    [FlightView].[R2_3R_NR] AS [R2_3R_NR], 
+    [FlightView].[R2_3R_NT] AS [R2_3R_NT], 
+    [FlightView].[R7_3R_NC_V] AS [R7_3R_NC_V], 
+    [FlightView].[R14_3R_NC_I] AS [R14_3R_NC_I], 
+    [FlightView].[R2_3R] AS [R2_3R], 
+    [FlightView].[R7_3R] AS [R7_3R], 
+    [FlightView].[R14_3R] AS [R14_3R], 
     [FlightView].[NUCP] AS [NUCP], 
-    [FlightView].[5M_LONGGAP_COUNT] AS [5M_LONGGAP_COUNT], 
-    [FlightView].[5R_LONGGAP_COUNT] AS [5R_LONGGAP_COUNT], 
-    [FlightView].[3M_LONGGAP_COUNT] AS [3M_LONGGAP_COUNT], 
-    [FlightView].[3R_LONGGAP_COUNT] AS [3R_LONGGAP_COUNT], 
+    [FlightView].[R3_5M_NG_LONGGAP_COUNT] AS [R3_5M_NG_LONGGAP_COUNT], 
+    [FlightView].[R3_5R_NG_LONGGAP_COUNT] AS [R3_5R_NG_LONGGAP_COUNT], 
+    [FlightView].[R3_3M_NG_LONGGAP_COUNT] AS [R3_3M_NG_LONGGAP_COUNT], 
+    [FlightView].[R3_3R_NG_LONGGAP_COUNT] AS [R3_3R_NG_LONGGAP_COUNT], 
+    [FlightView].[R8_MFL_AGE_AVG] AS [R8_MFL_AGE_AVG], 
+    [FlightView].[R9_MFL_AGE_MAX] AS [R9_MFL_AGE_MAX], 
+    [FlightView].[R11_STABLE_FLIGHT] AS [R11_STABLE_FLIGHT], 
+    [FlightView].[R11_CLIMB_DESCEND_FLIGHT] AS [R11_CLIMB_DESCEND_FLIGHT], 
+    [FlightView].[R11_IDENTIFY_FLIGHT_COUNT] AS [R11_IDENTIFY_FLIGHT_COUNT], 
     [FlightView].[FilePath] AS [FilePath], 
     [FlightView].[CreateTime] AS [CreateTime], 
     [FlightView].[ProcessRound] AS [ProcessRound]
     FROM [dbo].[FlightView] AS [FlightView]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="MappedFlightView" EntityType="Self.MappedFlightView" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [MappedFlightView].[Id] AS [Id], 
-    [MappedFlightView].[FlightID] AS [FlightID], 
-    [MappedFlightView].[AnotherFlightID] AS [AnotherFlightID], 
-    [MappedFlightView].[TimeFrom] AS [TimeFrom], 
-    [MappedFlightView].[TimeTo] AS [TimeTo], 
-    [MappedFlightView].[ZIGMA_E_SQ] AS [ZIGMA_E_SQ], 
-    [MappedFlightView].[N] AS [N], 
-    [MappedFlightView].[RMS] AS [RMS], 
-    [MappedFlightView].[CreateTime] AS [CreateTime], 
-    [MappedFlightView].[ProcessRound] AS [ProcessRound], 
-    [MappedFlightView].[Diagnose] AS [Diagnose], 
-    [MappedFlightView].[F1SensorID] AS [F1SensorID], 
-    [MappedFlightView].[F1AircraftID] AS [F1AircraftID], 
-    [MappedFlightView].[F1Callsign] AS [F1Callsign], 
-    [MappedFlightView].[F1Mode3ACode] AS [F1Mode3ACode], 
-    [MappedFlightView].[F1TrackID] AS [F1TrackID], 
-    [MappedFlightView].[F1TimeFrom] AS [F1TimeFrom], 
-    [MappedFlightView].[F1TimeTo] AS [F1TimeTo], 
-    [MappedFlightView].[F2SensorID] AS [F2SensorID], 
-    [MappedFlightView].[F2AircraftID] AS [F2AircraftID], 
-    [MappedFlightView].[F2Callsign] AS [F2Callsign], 
-    [MappedFlightView].[F2Mode3ACode] AS [F2Mode3ACode], 
-    [MappedFlightView].[F2TrackID] AS [F2TrackID], 
-    [MappedFlightView].[F2TimeFrom] AS [F2TimeFrom], 
-    [MappedFlightView].[F2TimeTo] AS [F2TimeTo]
-    FROM [dbo].[MappedFlightView] AS [MappedFlightView]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>
