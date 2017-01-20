@@ -37,6 +37,12 @@ namespace SUREF.Models
                         int cat = meta.Cat;
                         short? nucp = meta.NUCp_NIC;         
                         double?climbRate = meta.ClimbRate;
+                        double? Vx= meta.Vx;
+                        double? Vy = meta.Vy;
+                        double? flightLevelAge = meta.MeasuredFlightLevelAge;
+                        string callsign =meta.Callsign;
+                        string aircraftAddress =meta.AircraftAddress;
+                        string modecode=meta.Mode3A;
                         List<string> source = meta.Source;
                         List<short> sic_list = new List<short>();
                         if(source !=null)
@@ -60,11 +66,17 @@ namespace SUREF.Models
                         each.Add(baroMetricAltitude);                                   //8
                         each.Add(nucp);                                                 //9
                         each.Add(climbRate);                                            //10
+                        each.Add(Vx);                                                   //11
+                        each.Add(Vy);                                                   //12
+                        each.Add(flightLevelAge);                                       //13
+                        each.Add(callsign);                                             //14
+                        each.Add(aircraftAddress);                                      //15
+                        each.Add(modecode);                                             //16
                         result.Add(each);
                     }
                     catch(Exception ex)
                     {
-                        throw;
+                        throw ex;
                     }
                 }
                 return result;

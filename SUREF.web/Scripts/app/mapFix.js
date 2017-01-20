@@ -11,6 +11,8 @@
     var nucpDatas=[];
     var AircraftID = $("#Id").val();
     var yAxisLabels = [];
+    var yAxislabelsChart8 = [];
+    var yAxislabelsChart9 = [];
     var Date =$("#Date").val();
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
@@ -66,17 +68,49 @@
         }
         
     };
-    var findIndex = function (param) {
+    var findIndexchart2 = function (param) {
         var result = yAxisLabels.indexOf(param);
         return result==-1?null:result;
     }
-    var findMean = function () {
+    var findIndexchart8 = function (param) {
+        var result = yAxislabelsChart8.indexOf(param);
+        return result == -1 ? null : result;
+    }
+    var findIndexchart9 = function (param) {
+        var result = yAxislabelsChart9.indexOf(param);
+        return result == -1 ? null : result;
+    }
+    var findMean = function (params) {
         var sum = 0;
-        for(var i =0;i<$scope.nucpChart.length;i++)
+        for (var i = 0; i < params.length; i++)
         {
-            sum += $scope.nucpChart[i][1];
+            sum += params[i][1];
         }
-        return sum / $scope.nucpChart.length;
+        return (sum / params.length).toFixed(2);
+    }
+    var findAngle = function (vx, vy) {
+        var z = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2));
+        var result = 0;
+        if (vx > 0 && vy > 0) {
+            var theta = (Math.asin(vx / z))*180/Math.PI;
+            result= theta;
+        }
+        else if (vx > 0 && vy < 0) {
+            var theta = (Math.asin(-vy/z))*180/Math.PI;
+            result = (theta + 90);
+        }
+        else if (vx < 0 && vy < 0) {
+            var theta = (Math.asin(-vx / z))*180/Math.PI;
+            result = (theta + 180);
+        }
+        else if (vx < 0 && vy > 0) {
+            var theta = Math.asin(vy / z) * 180 / Math.PI;
+            result = (theta + 270);
+        }
+        else {
+            return null;
+        }
+        return parseFloat((Math.round(result * 100) / 100).toFixed(2));
     }
     var insertDataDistibution = function (param) {
         var index = distributionNucps.indexOf(param);
@@ -94,6 +128,34 @@
             $scope.nucpDistributionChart.push([distributionNucps[i], nucpDatas[i]]);
         }
     }
+    var addDataToChart8 = function (time,callsign, aircraftAddress) {
+        if (findIndexchart8(callsign) == null) {
+            yAxislabelsChart8.push(callsign);
+        }
+        var CallSignPlot = [getTimeForChart(time), findIndexchart8(callsign)];
+        $scope.ssrCallsignChart.push(CallSignPlot);
+        if (findIndexchart8(aircraftAddress) == null) {
+            yAxislabelsChart8.push(aircraftAddress);
+        }
+        var AircraftIdentPlot = [getTimeForChart(time), findIndexchart8(aircraftAddress)];
+        $scope.ssrAircraftIDChart.push(AircraftIdentPlot);
+    }
+    var addDataToChart9 = function (time, callsign, aircraftAddress) {
+        if (findIndexchart9(callsign) == null) {
+            yAxislabelsChart9.push(callsign);
+        }
+        var CallSignPlot = [getTimeForChart(time), findIndexchart9(callsign)];
+        $scope.adsbCallsignChart.push(CallSignPlot);
+        if (findIndexchart9(aircraftAddress) == null) {
+            yAxislabelsChart9.push(aircraftAddress);
+        }
+        var AircraftIdentPlot = [getTimeForChart(time), findIndexchart9(aircraftAddress)];
+        $scope.adsbAircraftIDChart.push(AircraftIdentPlot);
+    }
+    var addDataToChart10 = function (time, flAge) {
+        var plot = [getTimeForChart(time), flAge]
+        $scope.FLAge.push(plot);
+    }
     //$scope.date = "20161115";
     //$scope.FlightID = "71bd61";
     $scope.paths = [];
@@ -104,8 +166,15 @@
     $scope.ssrGeoHeightChart = [];
     $scope.ssrBaroHeightChart = [];
     $scope.adsbGeoHeightChart = [];
+    $scope.ssrAngleChart = [];
+    $scope.adsbAircraftIDChart = [];
+    $scope.adsbCallsignChart = [];
+    $scope.ssrAircraftIDChart = [];
+    $scope.ssrCallsignChart = [];
     $scope.nucpChart = [];
+    $scope.FLAge = [];
     $scope.nucpDistributionChart = [];
+    $scope.ssrClimbChart = [];
     $scope.avgNucp = 0;
     $scope.chartConfig = {
         options: {
@@ -125,7 +194,7 @@
         series: [
             {
                 data: $scope.adsbDataChart,
-                name: 'ADSB',
+                name: 'CAT21',
                 color:'blue',
                 marker: {
                     enabled: true,
@@ -134,7 +203,7 @@
             },
             {
                 data: $scope.ssrDataChart,
-                name: 'SSR',
+                name: 'CAT62',
                 color:'red',
                 marker: {
                     enabled: true,
@@ -179,7 +248,7 @@
         series: [
             {
                 data: $scope.adsbSICDataChart,
-                name: 'ADSB',
+                name: 'CAT21',
                 color: 'blue',
                 marker: {
                     enabled: true,
@@ -189,7 +258,7 @@
             },
             {
                 data: $scope.ssrSICDataChart,
-                name: 'SSR',
+                name: 'CAT62',
                 color: 'red',
                 marker: {
                     enabled: true,
@@ -351,7 +420,7 @@ $scope.chart5Config = {
         series: [
             {
                 data: $scope.nucpChart,
-                name: 'Nucp',
+                name: 'Nucp from CAT21',
                 color: 'green',
                 marker: {
                     enabled: true,
@@ -419,7 +488,254 @@ max:8
     },
     loading: true
 };
-    ////////////////////////////////////////////////////////  
+/////////////////////////////////////////////////////////////////////////////////  
+$scope.chart7Config = {
+    options: {
+        chart: {
+            type: 'scatter'
+        },
+        tooltip: {
+            formatter: function () {
+                return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : Angle " + this.y+" degrees";
+            }
+        }
+
+    },
+    title: {
+        text: 'Angle Versus Time of Flight ID ' + AircraftID
+    },
+    series: [
+        {
+            data: $scope.ssrAngleChart,
+            name: 'Angle from CAT62',
+            color: 'green',
+            marker: {
+                enabled: true,
+                radius: 2
+            }
+
+        }
+    ],
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            millisecond: "%H:%M:%S.%L"
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Angle (Degree)'
+        },
+        allowDecimals: false,
+        max:360
+    },
+    loading: true
+};
+
+
+    ///////////////////////////////////////////////////////////////////////////////// 
+$scope.chart8Config = {
+    options: {
+        chart: {
+            type: 'scatter'
+        },
+        tooltip: {
+            formatter: function () {
+                return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : " + yAxislabelsChart8[this.y];
+            }
+        }
+
+    },
+    title: {
+        text: 'Aircraft Identification / MRT ' 
+    },
+    series: [
+        {
+            data: $scope.ssrAircraftIDChart,
+            name: 'AircraftID',
+            color: 'blue',
+            marker: {
+                enabled: true,
+                radius: 2
+            },
+            visible: false
+        },
+        {
+            data: $scope.ssrCallsignChart,
+            name: 'CallSign',
+            color: 'red',
+            marker: {
+                enabled: true,
+                radius: 2
+            }
+        }
+    ],
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            millisecond: "%H:%M:%S.%L"
+        }
+    },
+    yAxis: {
+        title: {
+            text: ''
+        },
+        tickInterval: 1,
+        labels: {
+            formatter: function () {
+                //var result = change[this.value];
+                //return value !== 'undefined' ? value : this.value;
+
+                return yAxislabelsChart8[this.value];
+            }
+        }
+    },
+    loading: true
+};
+    ///////////////////////////////////////////////////////////////////////////////////////////
+$scope.chart9Config = {
+    options: {
+        chart: {
+            type: 'scatter'
+        },
+        tooltip: {
+            formatter: function () {
+                return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " : " + yAxislabelsChart9[this.y];
+            }
+        }
+
+    },
+    title: {
+        text: 'Aircraft Identification / ADS-B '
+    },
+    series: [
+        {
+            data: $scope.adsbAircraftIDChart,
+            name: 'AircraftID',
+            color: 'blue',
+            marker: {
+                enabled: true,
+                radius: 2
+            },
+            visible: false
+        },
+        {
+            data: $scope.adsbCallsignChart,
+            name: 'CallSign',
+            color: 'red',
+            marker: {
+                enabled: true,
+                radius: 2
+            }
+        }
+    ],
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            millisecond: "%H:%M:%S.%L"
+        }
+    },
+    yAxis: {
+        title: {
+            text: ''
+        },
+        tickInterval: 1,
+        labels: {
+            formatter: function () {
+                //var result = change[this.value];
+                //return value !== 'undefined' ? value : this.value;
+
+                return yAxislabelsChart9[this.value];
+            }
+        }
+    },
+    loading: true
+};
+    ///////////////////////////////////////////////////////////////////////////////////////////
+$scope.chart10Config = {
+    options: {
+        chart: {
+            type: 'scatter'
+        },
+        tooltip: {
+            formatter: function () {
+                return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " :  " + this.y;
+            }
+        }
+
+    },
+    title: {
+        text: 'Forward Altitude Age ' 
+    },
+    series: [
+        {
+            data: $scope.FLAge,
+            name: 'CAT62',
+            color: 'green',
+            marker: {
+                enabled: true,
+                radius: 2
+            }
+
+        }
+    ],
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            millisecond: "%H:%M:%S.%L"
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Value'
+        },
+        allowDecimals: false
+    },
+    loading: true
+};
+    ///////////////////////////////////////////////////////////////////////////////////////////
+$scope.chart11Config = {
+    options: {
+        chart: {
+            type: 'scatter'
+        },
+        tooltip: {
+            formatter: function () {
+                return "Time = " + moment(this.x).utc().format('HH:mm:ss.SSS') + " :  " + this.y;
+            }
+        }
+
+    },
+    title: {
+        text: 'Rate of Climb / Descend '
+    },
+    series: [
+        {
+            data: $scope.ssrClimbChart,
+            name: 'CAT62',
+            color: 'green',
+            marker: {
+                enabled: true,
+                radius: 2
+            }
+
+        }
+    ],
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            millisecond: "%H:%M:%S.%L"
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Value'
+        },
+        allowDecimals: false
+    },
+    loading: true
+};
+    ///////////////////////////////////////////////////////////////////////////////////////////
     var getDistance= function(aLat,aLng,bLat,bLng){
         var atan2 = Math.atan2
         var cos = Math.cos
@@ -450,7 +766,7 @@ max:8
         var target = list.filter(x => x.SIC == sic);
         var distance = getDistance(target[0].Lat, target[0].Lng, lat, lng);
         if (target.length != 0) {
-            var p1 = {
+             var p = {
                 layer: 'track',
                 color: color,
                 weight: width,
@@ -460,8 +776,9 @@ max:8
                 ],
                 dashArray: dash,
                 message:target[0].Name+'('+ text + "), Distance : " + distance + " km" 
+                
             };
-            return p1;
+            return p;
         }
     }
     var getColor = function (ssrList, adsbList,sic) {
@@ -484,15 +801,17 @@ max:8
 
         var line = getLine(list, lat, lng, sic, color, 'selected', 6, null);
         if (line != null) dynamicPath.push(line);
+        
         var aList = sicList.split('_');
-        aList.forEach(function (entry) {
-            if (entry != sic) {
-                color = getColor(ssrList, adsbList, entry);
-                var templine = getLine(list, lat, lng, entry, color, 'available', 3, '5,10');
-                if (templine != null) dynamicPath.push(templine);
-            }
-        });
-
+        if (aList != "") {
+            aList.forEach(function (entry) {
+                if (entry != sic) {
+                    color = getColor(ssrList, adsbList, entry);
+                    var templine = getLine(list, lat, lng, entry, color, 'available', 3, '5,10');
+                    if (templine != null) dynamicPath.push(templine);
+                }
+            });
+        }
         $scope.paths = mergeList(staticPath, dynamicPath);
     };
     //$scope.createPathToSur = function (lat, lng, sic, sicList,cat) {
@@ -561,7 +880,14 @@ max:8
             climbRate: ap[10],
             dt: getDateTime(ap[0]),
             siclist:ap[5],
-            icon: type==0?icons.blue:icons.red,
+            icon: type == 0 ? icons.blue : icons.red,
+            vx: ap[11],
+            vy: ap[12],
+            angle: findAngle(ap[11], ap[12]),
+            flightLevelAge: ap[13],
+            callsign: ap[14],
+            aircraftAddress: ap[15],
+            modecode:ap[16],
             //message: getPathtoSur(ap, typeSur),
             getMessageScope: function () { return $scope; }
         });
@@ -572,17 +898,18 @@ max:8
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]),parseFloat(ap[3])];
                 $scope.adsbDataChart.push(plot);
-                if (findIndex(change(ap[4])) ==null )
+                if (findIndexchart2(change(ap[4])) ==null )
                 {
                     yAxisLabels.push(change(ap[4]));
                 }
-                var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
+                var plotSic = [getTimeForChart(ap[0]), findIndexchart2(change(ap[4]))];
                 $scope.adsbSICDataChart.push(plotSic);
                 var geoPlot = [getTimeForChart(ap[0]), ap[7] / 100];
                 $scope.adsbGeoHeightChart.push(geoPlot);
                 var nucpPlot = [getTimeForChart(ap[0]), ap[9]];
                 $scope.nucpChart.push(nucpPlot);
                 insertDataDistibution(ap[9]);
+                addDataToChart9(ap[0], ap[14], ap[15]);
                 return getdynamic(ap,0);
                 //return dynamicitems.push({
                 //    layer: 'track',
@@ -611,16 +938,23 @@ max:8
             return points.map(function (ap) {
                 var plot = [getTimeForChart(ap[0]), parseFloat(ap[3])];
                 $scope.ssrDataChart.push(plot);
-                if (findIndex(change(ap[4])) == null) {
+                if (findIndexchart2(change(ap[4])) == null) {
                     yAxisLabels.push(change(ap[4]));
                 }
-                var plotSic = [getTimeForChart(ap[0]), findIndex(change(ap[4]))];
+                var plotSic = [getTimeForChart(ap[0]), findIndexchart2(change(ap[4]))];
                 $scope.ssrSICDataChart.push(plotSic);
                 var geoPlot = [getTimeForChart(ap[0]), ap[7]/100];
                 $scope.ssrGeoHeightChart.push(geoPlot);
                 var baroPlot = [getTimeForChart(ap[0]), ap[8]];
                 $scope.ssrBaroHeightChart.push(baroPlot);
-                return getdynamic(ap,1);
+                var anglePlot = [getTimeForChart(ap[0]), findAngle(ap[11], ap[12])];
+                $scope.ssrAngleChart.push(anglePlot);
+
+                addDataToChart8(ap[0], ap[14], ap[15]);
+                addDataToChart10(ap[0], ap[13]);
+                var climbRate = [getTimeForChart(ap[0]), ap[10]];
+                $scope.ssrClimbChart.push(climbRate);
+                return getdynamic(ap, 1);
                 //return dynamicitems.push({
                 //    layer: 'track',
                 //    lat: ap[1],
@@ -753,7 +1087,8 @@ max:8
             adsbTrack(res[0].data);
             ssrTrack(res[1].data);
             addDataToChart6();
-            $scope.avgNucp = findMean();
+            $scope.avgNucp = findMean($scope.nucpChart);
+            $scope.avgFLAge = findMean($scope.FLAge);
             $scope.markers = mergeList(staticitems, dynamicitems);
             $scope.paths = mergeList(staticPath, dynamicPath);
 
@@ -857,11 +1192,17 @@ max:8
             $scope.detailDatetime = args.model.dt;
             $scope.detailHeight = args.model.height;
             $scope.detailClimbRate = args.model.climbRate;
+            $scope.detailAngle = args.model.angle;
             $scope.detailAllDistance = '';
+            $scope.detailCallSign = args.model.callsign;
             for (var i = 0; i < args.model.siclist.length; i++) {
                 var obj = getNameBySIC(args.model.siclist[i]);
+                var status = 'A';
                 var distance = getDistance(obj[0].Lat, obj[0].Lng, args.model.lat, args.model.lng)
-                $scope.detailAllDistance += obj[0].Name + " :" + distance+" km"+'\r\n';
+                if (args.model.sic == obj[0].SIC) {
+                     status = 'S';
+                }
+                $scope.detailAllDistance += obj[0].Name +"("+status+ ") : " + distance+" km"+'\r\n';
             }
             var sicList = args.model.siclist.join('_');
             createPathToSur(args.model.lat, args.model.lng, args.model.sic, sicList, args.model.cat)
@@ -869,7 +1210,10 @@ max:8
     });
     $scope.$on('leafletDirectivePath.map.mouseover', function (event, path) {
         console.log(path.leafletObject.options.message);
-        $scope.detailDistance = path.leafletObject.options.message;
+        $scope.detailOfPath = path.leafletObject.options.message;
+    });
+    $scope.$on('leafletDirectivePath.map.mouseout', function (event, path) {
+        $scope.detailOfPath = '';
     });
 }]);
 

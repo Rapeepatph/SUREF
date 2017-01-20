@@ -22,7 +22,7 @@
     var data = [];
     var today = new Date();
     //$scope.strtdate = new Date(today.setDate((today.getDate() - 1)));
-    $scope.strtdate = new Date(2017,0,[5],7,0,0);
+    $scope.strtdate = new Date(2017,0,[5],7,0,0);                   //month start 0 - 11
     var getDateTime = function (s) {
         var d = moment.utc(s, "YYYY/MM/DD HH:mm:ss.SSS");
 
